@@ -1,0 +1,24 @@
+@use '../utils' as *;
+
+/*=============================
+    	24. map
+===============================*/
+
+.tg-map{
+    &-full{
+        padding-left: 35px;
+        @media #{$md,$sm} {
+            padding-left: 0;
+            height: 500px!important;
+        }
+        @media #{$xs} {
+            padding-left: 0;
+            height: 300px!important;
+        }
+        & iframe{
+            width: 100%;
+            height: 100%;
+            filter: saturate(0);
+        }
+    }
+}

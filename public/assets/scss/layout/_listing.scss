@@ -1,0 +1,989 @@
+@use '../utils' as *;
+
+/*=============================
+    	20. listing
+===============================*/
+
+.tg-listing{
+    &-card{
+        &-thumb{
+            border-radius: 12px 12px 0px 0px;
+            position: relative;
+            &::before{
+                position: absolute;
+                content: "";
+                bottom: 0;
+                left: 0;
+                height: 98px;
+                width: 100%;
+                opacity: 0;
+                visibility: hidden;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 75%);
+                transform: rotate(180deg);
+                z-index: 1;
+                @include tg-transition();
+            }
+            & .shape{
+                background-image: url(../../img/listing/angle.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                &-2{
+                    background-image: url(../../img/listing/angle-2.png);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+                &-3{
+                    background-image: url(../../img/listing/angle-3.png);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    display: flex;
+                    align-items: center;
+                    & svg{
+                        margin-right: 4px;
+                    }
+                }
+                &-4{
+                    background-image: url(../../img/listing/listing-5/shape-2.png);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    display: flex;
+                    align-items: center;
+                }
+            }
+            & .tg-card-border{
+                border-radius: 12px 12px 0px 0px;
+                @include tg-transition();
+            }
+            & img{
+                @include tg-transition();
+                border-radius: 12px 12px 0px 0px;
+            }
+        }
+        &-duration{
+            &-tour{
+                & span{
+                    font-size: 14px;
+                    line-height: 24px;
+                    text-transform: capitalize;
+                    color: var(--tg-common-black);
+                    display: flex;
+                    align-items: center;
+                    & svg{
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+        &-title{
+            font-weight: 600;
+            line-height: 133%;
+            text-transform: capitalize;
+            &:hover{
+                & a{
+                    color: var(--tg-theme-primary);
+                }
+            }
+        }
+        &-item{
+            background: var(--tg-common-white);
+            border: 1px solid var(--tg-border-3);
+            border-radius: 12px;
+            &:hover{
+                & .tg-listing-card-thumb{
+                    &::before{
+                       opacity: 1;
+                       visibility: visible;
+                    }
+                    & img{
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+        &-currency{
+            &-amount{
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 24px;
+                text-transform: capitalize;
+                color: var(--tg-common-white);
+            }
+            &-old{
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 1;
+                text-transform: capitalize;
+                color: #dbe6f7;
+                display: block;
+            }
+        }
+        &-activity{
+            &-person{
+                font-weight: 500;
+                font-size: 12px;
+                text-transform: capitalize;
+                color: var(--tg-common-white);
+                line-height: 22px;
+            }
+        }
+        &-price{
+            &-wrap{
+                height: 50px;
+                padding: 5px 29px 5px 23px;
+                &.price-bg{
+                    background-image: url(../../img/listing/angle-4.png);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    border-radius: 0px 0px 0px 12px;
+                    width: 158px;
+                }
+            }
+        }
+        &-content{
+            padding: 0px 18px 14px 25px;
+        }
+        &-review{
+            &.space{
+                padding: 10px 17px 10px 10px;
+            }
+        }
+    }
+    &-rating{
+        &-icon{
+            color: var(--tg-common-yellow);
+            font-size: 14px;
+        }
+        &-percent{
+            font-size: 13px;
+            line-height: 24px;
+            text-transform: capitalize;
+            color: var(--tg-common-black);
+        }
+    }
+    &-item{
+        &-price{
+            &-discount{
+                position: absolute;
+                top: 17px;
+                left: 0;
+                font-weight: 600;
+                font-size: 12px;
+                text-transform: capitalize;
+                color: var(--tg-common-white);
+                padding: 6px 20px 6px 14px;
+                line-height: 1;
+                display: inline-block;
+                &.offer-btm{
+                    top: 47px;
+                }
+            }
+        }
+        &-wishlist{
+            & a{
+                position: absolute;
+                top: 20px;
+                right: 24px;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: var(--tg-common-white);
+                text-align: center;
+                line-height: 33px;
+                &:hover{
+                    color: var(--tg-theme-primary);
+                }
+            }
+        }
+        &-box{
+            &-wrap{
+                @media #{$lg,$md,$sm,$xs} {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+    &-menu{
+        &-nav{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            & button{
+                font-weight: 500;
+                font-size: 15px;
+                text-transform: capitalize;
+                color: var(--tg-common-black);
+                padding: 0 17px;
+                border-bottom: 4px solid #e1e1e1;
+                padding-bottom: 10px;
+                position: relative;
+                margin-bottom: 10px;
+                & .icon{
+                    transform: translateY(-1px);
+                    display: inline-block;
+                }
+                & .borders{
+                    background: var(--tg-theme-primary);
+                    width: 0;
+                    height: 4px;
+                    bottom: -4px;
+                    left: auto;
+                    right: 0;
+                    position: absolute;
+                    @include tg-transition();
+                }
+                &.active{
+                    & .borders{
+                        width: 100%;
+                        left: 0;
+                        right: auto;
+                    }
+                }
+            }
+        }
+    }
+    &-shape{
+        position: absolute;
+        top: 0;
+        right: 172px;
+        z-index: -1;
+        @media #{$lg,$md,$sm,$xs} {
+            right: 0; 
+        }   
+        &-2{
+            position: absolute;
+            top: 216px;
+            right: 61px; 
+            @media #{$xxl,$xl,$lg,$md,$sm,$xs} {
+                right: 0; 
+            }    
+        }
+        &-3{
+            position: absolute;
+            bottom: 0;
+            left: 33px;
+            @media #{$xxl,$xl,$lg,$md,$sm,$xs} {
+                left: 0;
+            }    
+        }
+    }
+    &-avai{
+        &-btn{
+            font-size: 14px;
+            color: var(--tg-theme-primary);
+            border-radius: 6px;
+            padding: 5px 15px;
+            background: #f0e9ff;
+            display: inline-block;
+            transition: all .4s ease;
+            &:hover{
+                background: var(--tg-theme-primary);
+                color: var(--tg-common-white);
+            }
+        }
+    }
+    &-2{
+        &-card{
+            &-item{
+                border-radius: 30px;
+                & .tg-card-border {
+                    border-radius: 30px 30px 0px 0px;
+                }
+                &:hover .tg-listing-card-thumb img {
+                    transform: scale(1);
+                }
+                & .tg-listing-card-thumb::before {
+                    display: none;
+                }
+                & .tg-listing-card-title {
+                    line-height: 122%;
+                    margin-bottom: 3px;
+                }
+                & .tg-listing-card-content {
+                    padding: 0px 18px 26px 25px;
+                }
+                & .tg-listing-item-price-discount {
+                    top: 26px;
+                }
+                & .tg-listing-rating-icon {
+                    font-size: 12px;
+                }
+            }
+        }
+        &-shape{
+            position: absolute;
+            top: 90px;
+            left: 0;
+            z-index: -1;
+            &-2{
+                position: absolute;
+                left: 90px;
+                bottom: 0;
+                z-index: -1;
+                @media #{$xxl,$xl,$lg,$md,$sm,$xs} {
+                    left: 0;
+                } 
+            }
+            &-3{
+                position: absolute;
+                right: 0;
+                bottom: 260px;
+                z-index: -1; 
+            }
+        }
+        &-price{
+            font-weight: 600;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+            border: 1px solid var(--tg-common-white);
+            border-radius: 100px;
+            padding: 1px 15px;
+            display: inline-block;
+            background: var(--tg-theme-primary);
+            position: relative;
+            & span{
+                display: inline-block;
+            }
+            & del{
+                color: #dbe6f7;
+                font-size: 12px;
+                font-weight: 500;
+            }
+            & .shift{
+                font-size: 12px;
+            }
+            &-wrap{
+                margin-top: -20px;
+                margin-bottom: 16px;
+            }
+        }
+        &-mask{
+            position: absolute;
+            bottom: -1px;
+            left: -2px;
+            right: -2px;
+            width: 102%;
+            display: block;
+            & img{
+                border-radius: 0!important;
+            }
+        }
+    }
+    &-3{
+        &-card{
+            &-item{
+                & .tg-listing-card-thumb::before {
+                    opacity: 1;
+                    visibility: visible;
+                }
+                .tg-listing-card-thumb::after {
+                    position: absolute;
+                    content: "";
+                    bottom: 0;
+                    right: 0;
+                    height: 2px;
+                    width: 70%;
+                    background: var(--tg-theme-primary);
+                    z-index: 1;
+                }
+                & .tg-listing-2-price {
+                    position: absolute;
+                    bottom: 0;
+                    left: 24px;
+                    z-index: 2;
+                    background: none;
+                    border: none;
+                    background-image: url(../../img/listing/listing-3/rectangle.png);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    border-radius: 0px;
+                    width: auto;
+                    font-size: 18px;
+                    padding: 5px 25px 2px 10px;
+                    & del {
+                        font-size: 14px;
+                        transform: translateY(-1px);
+                        display: inline-block;
+                        color: #dbe6f7;
+                    }
+                    & .shift{
+                        font-size: 14px;
+                        font-weight: 400;
+                        display: inline-block;
+                        transform: translateY(-2px);
+                    }
+                }
+            }
+        }
+        &-shape{
+            position: absolute;
+            right: 63px;
+            bottom: 135px;
+            z-index: -1;
+            width: 13%;
+        }
+    }
+    &-4{
+        &-shape{
+            bottom: 0;
+        }
+        &-card{
+            &-item{
+                & .tg-listing-2-price {
+                    position: absolute;
+                    bottom: 16px;
+                    left: 21px;
+                    z-index: 3;
+                    border: none;
+                    border-radius: 6px;
+                    padding: 2px 9px 0px 9px;
+                }
+                & .tg-listing-2-price .new {
+                    font-size: 18px;
+                }
+                & .tg-listing-2-price .shift {
+                    font-weight: 400;
+                    transform: translateY(-2px);
+                }
+                & .tg-listing-2-price del {
+                    transform: translateY(-1px);
+                    display: inline-block;
+                }
+                & .tg-listing-item-wishlist a {
+                    position: inherit;
+                    border: 1px solid #d9d9d9;
+                    display: inline-block;
+                    line-height: 35px;
+                    width: 36px;
+                    height: 36px;
+                }
+                & .tg-listing-card-content {
+                    padding: 0px 24px 22px 24px;
+                }
+            }
+        }
+        &-pagination{
+            & .swiper-pagination-bullet {
+                margin: 0 3px!important;
+                width: 10px;
+                height: 10px;
+                background: #cdd7e9;
+                opacity: 1;
+                transition: all .4s ease;
+            }
+            & .swiper-pagination-bullet-active {
+                width: 26px;
+                background: var(--tg-theme-primary);
+                border-radius: 100px;
+                transition: all .4s ease;
+            }
+        }
+    }
+    &-5{
+        &-slider{
+            &-navigation{
+                @media #{$md,$sm,$xs} {
+                    text-align: left!important;
+                }
+                & button{
+                    border-radius: 6px;
+                    width: 50px;
+                    height: 50px;
+                    color: var(--tg-common-black);
+                    text-align: center;
+                    line-height: 50px;
+                    border: 1px solid var(--tg-border-3);
+                    background: var(--tg-common-white);
+                    transition: all .4s ease;
+                    &:hover{
+                        background: var(--tg-theme-primary);
+                        color: var(--tg-common-white);
+                        border-color: var(--tg-theme-primary);
+                    }
+                }
+            }
+        }
+        &-card{
+            &-item{
+                & .tg-listing-2-price {
+                    position: absolute;
+                    bottom: 16px;
+                    left: 21px;
+                    z-index: 3;
+                    border: none;
+                    border-radius: 6px;
+                    padding: 0px 9px 2px 9px;
+                    background: var(--tg-common-white);
+                    & .text{
+                        color: var(--tg-common-black);
+                        font-weight: 500;
+                        font-size: 12px;
+                        line-height: 200%;
+                        text-transform: capitalize;
+                    }
+                }
+                & .tg-listing-card-price{
+                    & .form{
+                        font-weight: 500;
+                        font-size: 13px;
+                        text-transform: capitalize;
+                        color: #767676;
+                    }
+                    & .price{
+                        font-weight: 600;
+                        font-size: 20px;
+                        text-transform: capitalize;
+                        color: var(--tg-theme-primary);
+                    }
+                }
+                & .tg-listing-card-duration-map {
+                    font-size: 14px;
+                }
+                & .tg-listing-card-content {
+                    padding: 0px 18px 24px 25px;
+                }
+                & .tg-listing-card-thumb .closed {
+                    background-image: url(../../img/listing/listing-5/shape-1.png);
+                }
+                & .tg-listing-item-price-discount.offer-btm {
+                    top: 45px;
+                    &-2{
+                        top: 75px;
+                    }
+                }
+            }
+        }
+    }
+    &-sort{
+        & span, a{
+            font-weight: 400;
+            font-size: 16px;
+            color: var(--tg-grey-1);
+            transition: all .4s ease;
+        }
+        & a{
+            &:hover{
+                color: var(--tg-theme-primary);
+            }
+        }
+    }
+    &-select{
+        &-price{
+            & .nice-select {
+                border-radius: 6px;
+                width: 179px;
+                line-height: 33px;
+                height: 36px;
+                background: #f3f3f4;
+                color: var(--tg-grey-1);
+                font-weight: 400;
+                font-size: 14px;
+                padding: 0px 15px;
+                text-transform: capitalize;
+                @media #{$lg,$md,$sm,$xs} {
+                    width: 170px;
+                }
+                &::after {
+                    color: var(--tp-grey-1);
+                    font-size: 14px;
+                    font-weight: 600;
+                    right: 15px;
+                }
+            }
+        }
+    }
+    &-box{
+        &-number{
+            &-found{
+                @media #{$sm,$xs} {
+                    text-align: right;
+                }
+                & span{
+                    text-transform: capitalize;
+                    color: var(--tg-common-black);
+                }
+            }
+        }
+        &-view{
+            & button{
+                border: 1px solid #c9ced7;
+                width: 36px;
+                height: 36px;
+                border-radius: 6px;
+                background: var(--tg-common-white);
+                transition: all .3s ease;
+                &.active{
+                    background: var(--tg-theme-primary);
+                    border-color: var(--tg-theme-primary);
+                    color: var(--tg-common-white);
+                }
+            }
+        }
+    }
+    &-booking{
+        &-shadow{
+            box-shadow: 0 5px 0 0 #d6d6d6;
+        }
+    }
+    &-map{
+        &-list{
+            &-wrap{
+                margin-right: -35px;
+                @media #{$md,$sm,$xs} {
+                    margin-right: 0;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                }
+            }
+        }
+        &-booking{
+            border-bottom: 1px solid #e1e1e1;
+            @media #{$lg} {
+                padding-right: 20px;
+            }
+            @media #{$md,$sm,$xs} {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            & .tg-booking-add-input-field {
+                @media #{$xxl,$lg} {
+                    width: 199px;
+                }
+            }
+            & .tg-booking-add-input-date .input {
+                @media #{$lg} {
+                    width: 199px;
+                }
+            }
+            & .bk-search-button {
+                @media #{$lg} {
+                    padding: 10px 63px;
+                }
+            }
+            & .tg-booking-form-input-group {
+                @media #{$xl,$lg,$md,$sm,$xs} {
+                    justify-content: flex-start!important;
+                }
+            }
+            & .tg-booking-form-location-list.tg-quantity {
+                @media #{$lg,$md,$sm,$xs} {
+                    left: 0;
+                    right: auto;
+                }
+            }
+        }
+        &-filter{
+            display: flex;
+            flex-wrap: wrap;
+            & .nice-select {
+                width: auto;
+                line-height: 31px;
+                height: 34px;
+                background: transparent;
+                color: var(--tg-grey-1);
+                font-weight: 400;
+                font-size: 14px;
+                padding: 0px 10px;
+                padding-right: 37px;
+                text-transform: capitalize;
+                border: 1px solid #e1e1e1;
+                border-radius: 5px;
+                margin-right: 8px;
+                &:after{
+                    right: 10px;
+                    font-size: 15px;
+                    color: var(--tp-grey-1);
+                }
+                & .option{
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    min-height: 30px;
+                    line-height: 30px;
+                }
+                &.item-first{
+                    padding-right: 55px;
+                }
+            }
+            &-bottom{
+                & .tg-listing-box-number-found span {
+                    font-weight: 500;
+                    font-size: 18px;
+                }
+                & .tg-listing-select-price .nice-select {
+                    border: none;
+                }
+                & .tg-listing-box-view-type {
+                    @media #{$lg,$md,$sm,$xs} {
+                        justify-content: flex-start!important;
+                    }
+                }
+                & .tg-listing-box-number-found {
+                    text-align: left;
+                }
+            }
+            &-wrap{
+                @media #{$md,$sm,$xs} {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+        }
+        &-list{
+            &-item{
+                & .tg-listing-card-item {
+                    display: flex;
+                    padding: 24px 30px 9px 24px;
+                    border-radius: 12px;
+                    width: 100%;
+                    @media #{$lg,$md,$sm,$xs} {
+                        flex-wrap: wrap;
+                    }
+                    @media #{$lg,$md,$sm,} {
+                        padding: 24px 24px 9px 24px;
+                    }
+                    @media #{$xs} {
+                        padding: 15px 15px 0 15px;
+                    }
+                }
+                & .tg-listing-card-content {
+                    padding: 0;
+                    padding-left: 24px;
+                    @media #{$lg,$md,$sm,$xs} {
+                        padding-left: 0;
+                    }
+                }
+                & .tg-listing-map-list-para {
+                    font-size: 15px;
+                    line-height: 20px;
+                    letter-spacing: 0;
+                    text-transform: capitalize;
+                    color: var(--tg-grey-1);
+                }
+                & .destination{
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    & span{
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        margin-right: 18px;
+                        margin-bottom: 5px;
+                        & svg{
+                            transform: translateY(-2px);
+                            margin-right: 3px;
+                        }
+                    }
+                }
+                & .tg-listing-card-thumb {
+                    border-radius: 10px;
+                    width: 56%;
+                    @media #{$xxl,$xl,$lg,$md,$sm,$xs} {
+                        width: 100%;
+                    }
+                    @media #{$xl} {
+                        width: 115%;
+                    }
+                }
+                & .tg-listing-card-thumb .tg-card-border {
+                    border-radius: 10px;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                & .tg-listing-2-price{
+                    position: inherit;
+                    padding: 5px 9px 1px 9px;
+                    @media #{$xs} {
+                        margin-bottom: 10px;
+                    }
+                }
+                & .tg-listing-map-list-border{
+                    display: block;
+                    border: 1px solid var(--tg-border-3);
+                    width: 100%;
+                    height: 1px;
+                }
+                & .tg-listing-avai {
+                    @media #{$xs} {
+                        flex-wrap: wrap;
+                    }
+                }
+            }
+        }
+    }
+    &-su{
+        &-card{
+            &-item{
+                border-radius: 24px;
+                & .tg-listing-item-price-discount {
+                    background: var(--tg-theme-primary);
+                    font-size: 15px;
+                    font-weight: 500;
+                    border-radius: 5px;
+                    padding: 8px 10px;
+                    top: 33px;
+                    left: 40px;
+                    z-index: 2;
+                }
+                & .tg-listing-card-thumb::before {
+                    opacity: 1;
+                    visibility: visible;
+                    top: 0;
+                    bottom: auto;
+                    left: 0;
+                    height: 100%;
+                    transform: rotate(0deg);
+                }
+                & .tg-listing-card-thumb {
+                    border-radius: 24px 24px 0px 0px;
+                }
+                & .tg-listing-card-thumb .tg-card-border {
+                    border-radius: 24px 24px 0px 0px;
+                }
+                & .tg-listing-item-wishlist a {
+                    top: 30px;
+                    right: 36px;
+                    width: 36px;
+                    height: 36px;
+                    z-index: 2;
+                }
+                & .tg-listing-card-duration-tour span {
+                    font-size: 15px;
+                    color: var(--tg-grey-1);
+                }
+                & .tg-listing-card-title {
+                    font-size: 22px;
+                    line-height: 30px;
+                    font-family: var(--tg-ff-outfit);
+                    @media #{$xl,$lg,$md,$sm,$xs} {
+                        font-size: 20px;
+                    }
+                }
+                & .tg-listing-card-currency-amount {
+                    font-weight: 600;
+                    font-size: 24px;
+                    color: var(--tg-theme-primary);
+                    & .currency-symbol {
+                        font-family: var(--tg-ff-outfit);
+                        font-weight: 400;
+                        font-size: 16px;
+                        text-transform: capitalize;
+                        color: var(--tg-grey-1);
+                    }
+                }
+                & .tg-listing-rating-icon {
+                    font-family: var(--tg-ff-outfit);
+                    font-size: 15px;
+                    color: var(--tg-grey-1);
+                    & i{
+                        color: var(--tg-common-yellow);
+                    }
+                }
+                & .tg-listing-rating-percent {
+                    color: #8f939f;
+                    font-family: var(--tg-ff-outfit);
+                    font-size: 15px;
+                }
+                & .tg-listing-card-price-wrap {
+                    height: auto;
+                    padding: 0;
+                }
+                & .tg-listing-card-content {
+                    padding: 0px 40px 30px 37px;
+                    @media #{$lg,$xs} {
+                        padding: 0px 20px 20px 20px;
+                    }
+                }
+            }
+        }
+        &-shape{
+            position: absolute;
+            top: 347px;
+            left: 53px;
+            &-2{
+                position: absolute;
+                right: 65px;
+                bottom: 320px;
+                @media #{$x4l, $x3l, $xxl} {
+                    right: 0;
+                    width: 100px;
+                }
+            }
+        }
+        &-spacing{
+            padding-bottom: 253px;
+        }
+        &-2{
+            &-shape{
+                bottom: 0;
+                left: 80px;
+            }
+        }
+    }
+}
+.list-card{
+    &.list-card-open{
+        & .tg-grid-full{
+            width: 100%;
+            & .tg-listing-card-item {
+                display: flex;
+            }
+            & .tg-listing-card-thumb {
+                border-radius: 12px;
+                margin-bottom: 0;
+            }
+            & .tg-listing-card-review.space {
+                @media #{$sm,$xs} {
+                    padding: 8px 8px 10px 0px;
+                }
+            }
+            & .tg-listing-card-content {
+                padding: 20px 18px 14px 25px;
+            }
+            & .tg-listing-card-price{
+                padding-left: 25px;
+            }
+            & .tg-listing-main-content{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            & .tg-listing-card-thumb img {
+                height: 100%;
+                object-fit: cover;
+            }
+            & .tg-listing-2-price-wrap {
+                margin-top: 0;
+                text-align: left!important;
+            }
+            & .tg-listing-2-mask {
+                display: none;
+            }
+            & .tg-listing-2-card-item .tg-card-border {
+                border-radius: 30px;
+            }
+            & .tg-listing-2-card-thumb {
+                @media #{$lg,$md,$sm,$xs} {
+                    width: 400px;
+                }
+            }
+            & .tg-listing-2-card-item .tg-listing-card-content {
+                @media #{$lg,$md,$sm,$xs} {
+                    width: 100%;
+                }
+            }
+            & .tg-listing-4-card-thumb {
+                @media #{$lg,$md,$sm,$xs} {
+                    width: 400px;
+                }
+            }
+            & .tg-listing-4-card-item .tg-listing-card-content {
+                @media #{$lg,$md,$sm,$xs} {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+.rounded-circale {
+    border-radius: 50%;
+}

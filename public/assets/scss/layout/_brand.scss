@@ -1,0 +1,33 @@
+@use '../utils' as *;
+
+/*=============================
+    	06. brand
+===============================*/
+
+.tg-brand{
+    &-slide{
+        & .swiper-slide {
+            width: 240px!important;
+        }
+    }
+    &-shape{
+        right: 33px;
+        bottom: 0;
+        position: absolute;
+        z-index: -1;
+        width: 13%;
+        @media #{$xxl,$xl,$lg,$md,$sm,$xs} {
+            right: 0;
+        }
+        &-2{
+            left: 46px;
+            bottom: 0;
+            position: absolute;
+            z-index: -1;
+            width: 10%;
+            @media #{$xxl,$xl,$lg,$md,$sm,$xs} {
+                left: 0;
+            }
+        }
+    }
+} 

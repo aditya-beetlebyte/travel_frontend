@@ -1,0 +1,181 @@
+@use '../utils' as *;
+
+/*=============================
+    	10. cta
+===============================*/
+
+.tg-cta{
+    &-wrap{
+        border-radius: 25px;
+    }
+    &-space{
+        margin-top: -127px;
+    }
+    &-thumb{
+        margin-right: -45px;
+    }
+    &-content{
+        margin-left: 75px;
+        margin-bottom: 60px;
+        @media #{$md,$sm,$xs} {
+            margin-left: 29px;
+            margin-bottom: 44px;
+            padding-top: 40px;
+        }
+    }
+    &-apps{
+        margin-bottom: 50px;
+        @media #{$md,$sm,$xs} {
+            margin-bottom: 38px;
+        }
+        @media #{$sm,$xs} {
+            margin-left: 29px;
+        }
+    }
+    &-title{
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 1.25;
+        text-transform: capitalize;
+        @media #{$xl} {
+            font-size: 26px;
+        }
+        @media #{$lg,$md,$sm,$xs} {
+            font-size: 22px;
+            & br{
+                display: none;
+            }
+        }
+    }
+    &-3{
+        &-shape{
+            position: absolute;
+            top: 35px;
+            right: 50px;
+            z-index: -1;
+            &-2{
+                position: absolute;
+                bottom: 0;
+                right: 19%;
+                z-index: -1;
+            }
+        }
+        &-content{
+           & p{
+                font-weight: 500;
+           }
+        }
+        &-apps{
+            @media #{$sm,$xs} {
+               padding-bottom: 70px;
+            }
+        }
+    }
+    &-4{
+        &-spacing{
+            margin-left: -50px;
+            margin-right: -50px;
+            border-radius: 1000px;
+            @media #{$xl,$lg,$md,$sm,$xs} {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            @media #{$md,$sm,$xs} {
+                border-radius: 20px;
+            }
+            @media #{$sm,$xs} {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            & .tg-cta-3-shape-2 {
+                right: 11%;
+                border-radius: 0px 0px 50px 0px;
+            }
+        }
+        &-thumb{
+            margin-left: 228px;
+            @media #{$lg} {
+                margin-left: 150px;
+            }
+            @media #{$md,$sm,$xs} {
+                margin-left: 0;
+            }
+        }
+        &-content{
+            margin-left: -45px;
+            margin-right: 205px;
+            @media #{$lg,$md,$sm,$xs} {
+                margin-left: 0;
+                margin-right: 105px;
+            }
+            @media #{$md,$sm,$xs} {
+                margin-right: 0;
+            }
+            & p{
+                text-transform: capitalize;
+            }
+        }
+    }
+    &-price{
+        &-shape{
+            position: absolute;
+            left: 73px;
+            top: 35.5%;
+            transform: translateY(-43%);
+            z-index: -1;
+            @media #{$xl} {
+                left: 0;
+                top: 23.5%;
+            }
+            &-2{
+                position: absolute;
+                right: 60px;
+                top: 44.5%;
+                transform: translateY(-43%);
+                z-index: -1;
+                @media #{$xl} {
+                    right: 0;
+                    top: 34.5%;
+                }  
+            }
+        }
+    }
+    &-su{
+        &-wrapper{
+            & .tg-cta-title {
+                font-family: var(--tg-ff-outfit);
+            }
+        }
+        &-2{
+            & .tg-cta-3-thumb {
+                @media #{$sm,$xs} {
+                    padding-top: 0;
+                }
+            }
+            & .tg-cta-3-content {
+                @media #{$sm,$xs} {
+                    padding-top: 80px;
+                    padding-bottom: 30px;
+                }
+            }
+            & .tg-cta-3-apps {
+                @media #{$sm,$xs} {
+                    padding-bottom: 30px;
+                }
+            }
+            & .shape{
+                right: 140px;
+                top: 0;
+                z-index: -1;
+                &-2{
+                    left: 132px;
+                    bottom: 0;
+                    z-index: -1;
+                    @media #{$xxl,$xl,$lg,$md,$sm,$xs} {
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

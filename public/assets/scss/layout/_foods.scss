@@ -1,0 +1,43 @@
+@use '../utils' as *;
+
+/*=============================
+    	16. foods
+===============================*/
+
+.tg-foods{
+    &-title{
+        font-weight: 500;
+        font-size: 22px;
+        text-transform: capitalize;
+        color: var(--tg-common-black);
+        & a{
+            &:hover{
+                color: var(--tg-theme-primary);
+            }
+        }
+        & span{
+            font-size: 18px;
+            color: var(--tg-grey-1);
+        }
+    }
+    &-wrap{
+        &:hover{
+            & .tg-foods-thumb{
+                & img{
+                    transform: scale(1.1) rotate(30deg);
+                }
+            }
+        }
+    }
+    &-thumb{
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+        background: var(--tg-common-white);
+        border: 10px solid var(--tg-common-white);
+        border-radius: 50%;
+        & img{
+            border-radius: 50%;
+            transition: all .4s ease;
+            width: 100%;
+        }
+    }
+}

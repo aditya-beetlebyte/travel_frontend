@@ -1,0 +1,415 @@
+@use '../utils' as *;
+/*============================================
+
+   Theme Name: Tourex - Tour & Travel Booking html5 Template
+   Author : Theme_Dox
+   Support: https://themedox.ticksy.com
+   Description: Tourex - Tour & Travel Booking html5 Template
+   Version: 1.0.0
+
+==============================================*/
+
+/* CSS Index
+==============================================
+
+	// components
+
+	01. Animation
+	02. background
+	03. Breadcrumb
+	04. Button
+	05. minicart
+	06. Mobile Menu
+	07. Nice Select
+	08. OffCanvas
+	09. pagenation
+	10. Preloader
+	11. Scroll Top
+	12. Search
+	13. Section Title
+	14. spacing default responsive
+
+	// layout
+
+    01. about
+	02. ads
+	03. banner
+	04. blog
+	05. booking
+	06. brand
+	07. chose
+	08. contact
+	09. counter
+	10. cta
+	11. destination
+	12. error
+	13. faq
+	14. filter
+	15. flatpicker
+	16. foods
+	17. footer
+	18. Header
+	19. hero
+	20. listing
+	23. location
+	24. map
+	25. shop
+	26. shop
+	27. team
+	28. testimonial
+	29. listing
+	30. login
+
+==============================================*/
+
+
+
+/*============================================
+/*  01. Theme Default CSS
+==============================================*/
+
+@import url($font-url);
+
+
+/*=============================
+	Typography css start
+===============================*/
+body {
+	font-family: var(--tg-ff-body);
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--tg-grey-1);
+	line-height: 26px;
+}
+img,
+.img {
+	max-width: 100%;
+	@include transition(.3s);
+}
+a,
+button {
+	color: inherit;
+	outline: none;
+	border: none;
+	background: transparent;
+	text-decoration: none;
+	@include transition(.3s);
+}
+a:focus,
+.btn:focus,
+.button:focus {
+	text-decoration: none;
+	outline: none;
+	@include box-shadow(none);
+}
+a:hover,
+button:hover {
+	color: var(--tg-common-black);
+	text-decoration: none;
+}
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+li{
+	list-style: none;
+}
+.scrool-bar::-webkit-scrollbar {
+	width: 5px;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	margin-left: 5px;
+}
+.scrool-bar::-webkit-scrollbar-thumb {
+	background-color: #e1e1e1;
+	outline: 1px solid #e1e1e1;
+}
+.scrool-bar::-mos-webkit-scrollbar-thumb {
+	background-color: #e1e1e1;
+	outline: 1px solid #e1e1e1;
+}
+.scrool-height{
+	width: 100%;
+	height: 240px;
+	overflow-y: scroll;
+}
+button:focus,
+input:focus,
+input:focus,
+textarea,
+textarea:focus {
+	outline: 0;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+input[type="url"],
+textarea{
+	outline: none;
+	background-color: #fff;
+	height: 56px;
+	width: 100%;
+	line-height: 56px;
+	font-size: 15px;
+	color:  var(--tg-grey-1);
+	padding-left: 26px;
+	padding-right: 26px;
+	border: 1px solid #a2a9ac;
+	@include placeholder{
+		color: var(--tg-grey-1);
+	}
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--tg-common-black);
+	font-weight: 700;
+	line-height: 1.1;
+	text-transform: unset;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+	color: inherit;
+}
+h1 {
+	font-size: 48px;
+}
+h2 {
+	font-size: 36px;
+}
+h3 {
+	font-size: 24px;
+}
+h4 {
+	font-size: 18px;
+}
+h5 {
+	font-size: 17px;
+}
+h6 {
+	font-size: 16px;
+}
+p {
+	margin-bottom: 15px;
+}
+label {
+	color: var(--tg-common-black);
+	cursor: pointer;
+}
+
+input[type="color"] {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	background: none;
+	border: 0;
+	cursor: pointer;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	border-radius: 50%;
+}
+
+*::-moz-selection {
+	background: var(--tg-theme-primary);
+	color: var(--tg-common-white);
+	text-shadow: none;
+}
+::-moz-selection {
+	background: var(--tg-theme-primary);
+	color: var(--tg-common-white);
+	text-shadow: none;
+}
+::selection {
+	background: var(--tg-theme-primary);
+	color: var(--tg-common-white);
+	text-shadow: none;
+}
+
+/*=============================
+    - Input Placeholder
+===============================*/
+input,
+textarea {
+    color: var(--tg-grey-1);
+}
+*::-moz-placeholder {
+	color: var(--tg-grey-1);
+	font-size: 16px;
+	opacity: 1;
+}
+*::placeholder {
+	color: var(--tg-grey-1);
+	font-size: 16px;
+	opacity: 1;
+}
+
+/*=============================
+    - Common Classes
+===============================*/
+.fix {
+    overflow:hidden
+}
+.clear {
+    clear: both;
+}
+.p-relative{
+	position: relative;
+}
+.p-absolute{
+	position: absolute;
+}
+.lh-28{
+	line-height: 28px;
+}
+.tg-round-15{
+	border-radius: 15px;
+}
+.tg-round-25{
+	border-radius: 25px;
+}
+
+.z-index-m-1{
+	z-index: -1;
+}
+.z-index-1{
+	z-index: 1;
+}
+.z-index-2{
+	z-index: 2;
+}
+.z-index-3{
+	z-index: 3;
+}
+.z-index-4{
+	z-index: 4;
+}
+.z-index-5{
+	z-index: 5;
+}
+.z-index-6{
+	z-index: 6;
+}
+.z-index-7{
+	z-index: 7;
+}
+.z-index-8{
+	z-index: 8;
+}
+.z-index-9{
+	z-index: 9;
+}
+.z-index-10{
+	z-index: 10;
+}
+.z-index-999{
+	z-index: 999;
+}
+.gx-10{
+	--bs-gutter-x: 10px;
+}
+.gx-15{
+	--bs-gutter-x: 15px;
+}
+.gx-20{
+	--bs-gutter-x: 20px;
+}
+.gx-24{
+	--bs-gutter-x: 24px;
+}
+.gx-30{
+	--bs-gutter-x: 30px;
+}
+.gx-40{
+	--bs-gutter-x: 40px;
+}
+.gx-45{
+	--bs-gutter-x: 45px;
+}
+.gx-50{
+	--bs-gutter-x: 50px;
+}
+.gx-60{
+	--bs-gutter-x: 60px;
+}
+.gx-70{
+	--bs-gutter-x: 70px;
+}
+.gx-80{
+	--bs-gutter-x: 80px;
+}
+.gx-90{
+	--bs-gutter-x: 90px;
+}
+.gx-100{
+	--bs-gutter-x: 100px;
+}
+.underline-black{
+	@include tgborder(#072032, 0,0);
+	@include tg-transition(all .4s ease);
+	&:hover{
+			@include tgborder(#072032, 0,100%);
+			@include tg-transition(all .4s ease);
+	}
+}
+
+.underline-white{
+	@include tgborder(#fff, 0,0);
+	@include tg-transition(all .4s ease);
+	&:hover{
+			@include tgborder(#fff, 0,100%);
+			@include tg-transition(all .4s ease);
+	}
+}
+.tg-transparent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+.text-right{
+	text-align: right
+}
+.top-sticky {
+    position: sticky;
+    top: 120px;
+}
+.fs-40{
+	font-size: 40px!important;
+}
+/*=============================
+    - Bootstrap Custom
+=============================*/
+
+
+.include-bg{
+	@include background();
+}
+
+.slide-transtion {
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+}
+
+// custom-container-here
+$container:(1860,1545,1630,1790);
+
+@each $number in $container{
+	@media (min-width:1400px) {
+		.container-#{$number}{
+			max-width: #{$number}px;
+		}
+	}
+}
+

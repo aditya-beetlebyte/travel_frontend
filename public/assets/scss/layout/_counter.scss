@@ -1,0 +1,52 @@
+@use '../utils' as *;
+
+/*=============================
+    	09. counter
+===============================*/
+
+.tg-counter{
+    &-title{
+        font-size: 90px;
+        text-transform: capitalize;
+        color: #f5f5f5;
+        margin-bottom: 0;
+        @media #{$xl} {
+            font-size: 70px;
+        }
+        @media #{$lg,$sm} {
+            font-size: 55px;
+        }
+    }
+    &-subtitle{
+        font-weight: 600;
+        font-size: 18px;
+        text-transform: capitalize;
+        color: var(--tg-common-black);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+    &-2{
+        &-item{
+            & .tg-counter-title {
+                color: #ebebeb;
+            }
+        }
+    }
+    &-5{
+        &-border{
+            border-bottom: 1px solid #d8d8d8;
+        }
+    }
+    &-su{
+        &-2{
+            & .tg-counter-subtitle {
+                font-family: var(--tg-ff-outfit);
+                font-size: 20px;
+            }
+        }
+    }
+}

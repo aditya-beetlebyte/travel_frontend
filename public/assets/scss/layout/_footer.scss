@@ -1,0 +1,196 @@
+@use '../utils' as *;
+
+/*=============================
+    	17. footer
+===============================*/
+
+.tg-footer{
+    &-widget{
+        @media #{$md,$sm,$xs} {
+            margin-left: 0;
+        }
+        & p{
+            line-height: 24px;
+            text-transform: capitalize;
+            color: #acadb5;
+            font-size: 15px;
+        }
+        &-title{
+            font-size: 20px;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+        }
+    }
+    &-link{
+        @media #{$lg} {
+            margin-left: 30px;
+        }
+        @media #{$xs} {
+            margin-left: 0;
+        }
+        & ul{
+            & li{
+                & a{
+                    text-transform: capitalize;
+                    color: #acadb5;
+                    display: inline-block;
+                    padding: 6px 0px;
+                    &:hover{
+                        color: var(--tg-common-white);
+                    }
+                }
+            }
+        }
+    }
+    &-info{
+        margin-left: -33px;
+        @media #{$md,$sm,$xs} {
+            margin-left: 0;
+        }
+        & ul{
+            & li{
+                text-transform: capitalize;
+                color: #acadb5;
+                display: inline-block;
+                font-weight: 500;
+                padding: 10px 0px;
+                & a{
+                    &:hover{
+                        color: var(--tg-common-white);
+                    }
+                }
+            }
+        }
+    }
+    &-form{
+        position: relative;
+        &-btn{
+            width: 55px;
+            height: 45px;
+            background: var(--tg-theme-primary);
+            border-radius: 0px 4px 4px 0px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        & input{
+            border-radius: 5px;
+            height: 45px;
+            width: 100%;
+            background: var(--tg-common-white);
+            font-size: 15px;
+            color: var(--tg-grey-1);
+            padding: 10px 50px 10px 16px;
+            box-shadow: none;
+            border: 1px solid transparent;
+            &:focus{
+                border-color: var(--tg-theme-primary);
+            }
+        }
+    }
+    &-social{
+        display: flex;
+        & a{
+            border-radius: 31px;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 43px;
+            background: var(--tg-grey-1);
+            display: inline-block;
+            color: var(--tg-common-white);
+            margin-right: 10px;
+            flex: 0 0 auto;
+            &:hover{
+                background: var(--tg-theme-primary);
+            }
+        }
+    }
+    &-space{
+        margin-top: -120px;
+        padding-top: 240px;
+        @media #{$lg} {
+            margin-top: -98px;
+            padding-top: 206px;
+        }
+        @media #{$md,$sm,$xs} {
+            margin-top: -88px;
+            padding-top: 184px;
+        }
+    }
+    &-copyright{
+        border-top: 1px solid #212635;
+        padding: 43px 10px;
+        & span{
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: capitalize;
+            color: #7b7e88;
+            display: inline-block;
+            & a{
+                &:hover{
+                    color: var(--tg-common-white);
+                }
+            }
+        }
+    }
+    &-su{
+        &-wrapper{
+            & .tg-footer-copyright {
+                border-top: 1px solid #231145;
+            }
+            & .tg-footer-widget-title {
+                font-family: var(--tg-ff-outfit);
+            }
+            & .tg-footer-link ul li a {
+                font-family: var(--tg-ff-outfit);
+                color: #ccc3dc;
+            }
+            & .tg-footer-info ul li {
+                color: #ccc3dc;
+            }
+            & .tg-footer-widget p {
+                color: #ccc3dc;
+                line-height: 26px;
+                font-family: var(--tg-ff-outfit);
+                font-size: 16px;
+            }
+            & .tg-footer-form input {
+                font-size: 14px;
+                color: var(--tg-common-black);
+                border-radius: 100px;
+                &::placeholder{
+                    font-size: 14px;
+                    color: #6a5e7e;
+                }
+            }
+            & .tg-footer-form-btn {
+                width: 45px;
+                height: 37px;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 5px;
+                border-radius: 100px;
+            }
+            & .tg-footer-copyright span {
+                font-weight: 400;
+                font-family: var(--tg-ff-outfit);
+                color: #6c6280;
+                font-size: 18px;
+            }
+            & .tg-footer-social a {
+                background: #2c2140;
+            }
+        }
+        &-2{
+            &-wrapper{
+                & .tg-footer-social a {
+                    background: #362752;
+                }
+                & .tg-footer-copyright {
+                    padding: 46px 10px;
+                }
+            }
+        }
+    }
+}

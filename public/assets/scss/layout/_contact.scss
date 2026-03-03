@@ -1,0 +1,68 @@
+@use '../utils' as *;
+
+/*=============================
+    	08. contact
+===============================*/
+
+.tg-contact{
+    &-info{
+        &-wrap{
+            border: 1px solid #e8e8e8;
+            border-radius: 30px;
+            background: var(--tg-grey-5);
+            padding: 46px 50px 40px 50px;
+            @media #{$xs} {
+                padding: 26px 30px 20px 30px;
+            }
+            & .tg-team-details-contact {
+                display: block;
+            }
+            & .item{
+                margin-bottom: 14px;
+            }
+        }
+    }
+    &-map{
+        & iframe{
+            width: 100%;
+            height: 227px;
+            filter: saturate(0);
+            border: 1px solid var(--tg-common-white);
+            border-radius: 20px;
+        }
+    }
+    &-title{
+        font-weight: 600;
+        font-size: 36px;
+        text-transform: capitalize;
+        color: var(--tg-common-black);
+        @media #{$lg,$md,$sm,$xs} {
+            & br{
+                display: none;
+            }
+        }
+    }
+    &-content{
+        &-wrap{
+            @media #{$md,$sm,$xs} {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            & p{
+                line-height: 26px;
+                text-transform: capitalize;
+            }
+        }
+    }
+    &-form{
+        & .input, .textarea{
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            background: transparent;
+            height: 45px;
+        }
+        & .textarea{
+            height: 140px;
+        }
+    }
+}

@@ -1,0 +1,87 @@
+@use '../utils' as *;
+
+/*=============================
+    01. Animation
+===============================*/
+@keyframes zoom {
+	0% {
+			-webkit-transform: scale(1);
+			transform: scale(1)
+	}
+
+	50% {
+			-webkit-transform: scale(1.1);
+			transform: scale(1.1)
+	}
+
+	100% {
+			-webkit-transform: scale(1);
+			transform: scale(1)
+	}
+}
+
+@keyframes dash {
+	to {
+	  stroke-dashoffset: 0px;
+	  stroke-dasharray: 3000;
+	}
+  }
+
+// about text animation
+@include keyframes(about-text){
+	0% {
+        width: 0;
+    }
+
+    100% {
+		width: 100%;
+    }
+}
+
+// borderanimate2
+@include keyframes(borderanimate2){
+    0% {
+        transform: translate(-50%, -50%) scale(.8);
+    }
+	60%{
+		opacity: 1;
+	}
+      100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+      }
+}
+
+@include keyframes(rotate-infinite-2){
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+.rotate-infinite-2{
+	-webkit-animation: rotate-infinite-2 15s linear infinite;
+	animation: rotate-infinite-2 15s linear infinite;
+}
+
+@include keyframes(rotate-infinite){
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(-360deg);
+	}
+}
+.rotate-infinite{
+	-webkit-animation: rotate-infinite 15s linear infinite;
+	animation: rotate-infinite 15s linear infinite;
+}
+@keyframes headerSlideDown {
+	0% {
+	 margin-top:-150px
+	}
+	100% {
+	 margin-top:0
+	}
+}

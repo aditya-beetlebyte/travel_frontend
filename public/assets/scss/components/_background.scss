@@ -1,0 +1,14 @@
+@use '../utils' as *;
+
+/*=============================
+    02. background
+===============================*/
+.tg-grey-bg{
+    background: var(--tg-grey-5);
+}
+.tg-grey-bg-2{
+    background: var(--tg-grey-8);
+}
+.tg-primary-bg{
+    background: var(--tg-theme-primary);
+}

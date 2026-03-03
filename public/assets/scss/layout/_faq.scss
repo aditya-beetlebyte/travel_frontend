@@ -1,0 +1,49 @@
+@use '../utils' as *;
+
+/*=============================
+    	13. faq
+===============================*/
+
+.tg-faq{
+    &-content{
+        & .accordion-button:focus {
+            box-shadow: none;
+            border: none;
+        }
+        & .accordion-item:first-of-type .accordion-button {
+            border-radius: 12px;
+        }
+        & .accordion-body {
+            padding: 0px 30px;
+            padding-bottom: 25px;
+        }
+        & .accordion-item:last-of-type .accordion-button.collapsed {
+            border-radius: 12px;
+        }
+        & .accordion-item {
+            border: 1px solid transparent;
+            &.tg-faq-active{
+                border: 1px solid #d8d8d8;
+                border-radius: 12px;
+            }
+            border: none;
+            & .accordion-header {
+                & button{
+                    font-weight: 600;
+                    font-size: 18px;
+                    text-transform: capitalize;
+                    color: var(--tg-common-black);
+                    border: none;
+                    padding: 26px 30px;
+                    background: #f6f7f9;
+                    border-radius: 12px;
+                }
+                & .accordion-button:not(.collapsed) {
+                    background: none;
+                    box-shadow: none;
+                    color: var(--tg-theme-primary);
+                }
+            }
+        }
+    }
+}

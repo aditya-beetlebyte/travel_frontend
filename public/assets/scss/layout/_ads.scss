@@ -1,0 +1,179 @@
+@use '../utils' as *;
+
+/*=============================
+    	02. ads
+===============================*/
+
+.tg-ads{
+    &-wrap{
+        border-radius: 20px;
+        padding: 0px 45px 45px 20px;
+        height: 100%;
+        &-2{
+            border-radius: 20px;
+            padding: 37px 30px 30px 30px;
+            height: 100%;
+        }
+        &-3{
+            border-radius: 20px;
+            padding: 34px 30px 27px 42px;
+            height: 100%;
+            & .tg-btn{
+                background: var(--tg-theme-primary);
+            }
+            & .tg-ads-discount {
+                 margin-top: -4px; 
+            }
+            & .tg-ads-discount-inner{
+                & h2 {
+                    color: var(--tg-common-white);
+                }
+                & h3 {
+                    color: var(--tg-common-white);
+                }
+                & span {
+                    color: var(--tg-common-white);
+                }
+            }   
+        }
+    }
+    &-upto{
+        background: var(--tg-theme-primary);
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-top: -50px;
+        padding-top: 66px;
+        & h2{
+            font-size: 45px;
+            line-height: 1;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+        }
+        & .saving{
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.06em;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+            display: inline-block;
+            transform: translateY(-8px);
+        }
+        & .upto{
+            font-weight: 700;
+            font-size: 9px;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+            transform: rotate(-90deg);
+            position: absolute;
+            top: 49%;
+            right: 16px;
+        }
+    }
+    &-btn{
+        & .tg-btn{
+            font-size: 12px;
+            padding: 3px 16px;
+            border-radius: 100px;
+        }
+    }
+    &-content{
+        @media #{$xl,$lg,$md,$sm,$xs} {
+            margin-left: 0;
+        }
+        @media #{$sm,$xs} {
+            text-align: left!important;
+        }
+        &-2{
+            & h5{
+                font-weight: 700;
+                font-size: 16px;
+                text-transform: uppercase;
+                color: #003486;
+            }
+            & a{
+                font-weight: 600;
+                font-size: 12px;
+                text-transform: uppercase;
+                color: var(--tg-common-white);
+                background: #003385;
+                border-radius: 50px;
+                padding: 2px 12px;
+                display: inline-block;
+                transform: translateY(-12px);
+            }
+        }
+    }
+    &-discount{
+        margin-top: 8px;
+        &-inner{
+            transform: translateY(-6px);
+            & h2{
+                font-size: 50px;
+                text-transform: uppercase;
+                color: var(--tg-theme-primary);
+            }
+            & h3{
+                font-size: 30px;
+                text-transform: uppercase;
+                color: var(--tg-theme-primary);
+            }
+            & span{
+                font-weight: 600;
+                font-size: 18px;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: var(--tg-theme-primary);
+                display: inline-block;
+                line-height: 1;
+                transform: translateY(-7px);
+            }
+        }
+    }
+    &-space{
+        margin-bottom: -130px;
+        @media #{$md,$sm,$xs} {
+            margin-bottom: 70px;
+        }
+    }
+    &-su{
+        &-space{
+            margin-top: -130px;
+        }
+        &-wrap{
+            & img{
+                border-radius: 20px;
+            }
+        }
+        &-wrapper{
+            display: flex;
+            align-items: center;
+            padding: 52px 30px 27px 60px;
+            @media #{$xs} {
+                padding: 42px 30px 27px 30px;
+            }
+            & .travel{
+                font-weight: 700;
+                font-size: 24px;
+                text-transform: uppercase;
+                text-decoration: underline;
+                text-decoration-skip-ink: none;
+                color: var(--tg-common-white);
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+            & .tg-btn {
+                font-size: 13px;
+                font-weight: 700;
+                padding: 9px 32px;
+                background: var(--tg-common-white);
+                color: var(--tg-common-black);
+                border-radius: 9px;
+                display: inline-block;
+            }
+            & .tg-ads-discount-inner h2 {
+                transform: translateY(-5px);
+            }
+        }
+    }
+}

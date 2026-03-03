@@ -1,0 +1,51 @@
+@use '../utils' as *;
+
+/*=============================
+	13. Section Title
+===============================*/
+.tg-section{
+	&-subtitle{
+		font-family: var(--tg-ff-segoepr);
+		font-weight: 700;
+		text-transform: capitalize;
+		color: var(--tg-theme-primary);
+	}
+	&-su{
+		&-subtitle{
+			font-family: var(--tg-ff-outfit);
+			font-weight: 500;
+			font-size: 16px;
+			text-transform: capitalize;
+			color: var(--tg-theme-primary);
+			background: #f5efff;
+			display: inline-block;
+			padding: 6px 15px;
+			border-radius: 6px;
+			&.su-subtitle{
+				&-2{
+					background: #ebe5fa;
+				}
+			}
+		}
+		&-title{
+			font-size: 36px;
+			font-family: var(--tg-ff-outfit);
+		}
+		&-para{
+			font-family: var(--tg-ff-outfit);
+			font-weight: 400;
+			color: var(--tg-common-black);
+			line-height: 28px;
+			text-transform: capitalize;
+			@media #{$xl,$lg,$md,$sm,$xs} {
+				& br{
+					display: none;
+				}
+			}
+			&-2{
+				color: var(--tg-grey-1);
+				line-height: 26px;
+			}
+		}
+	}
+}

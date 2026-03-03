@@ -1,0 +1,51 @@
+{
+  "name": "triptrixvoyages",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@hookform/resolvers": "^5.0.1",
+    "@netlify/plugin-nextjs": "^5.15.8",
+    "@reduxjs/toolkit": "^2.7.0",
+    "bootstrap": "^5.3.5",
+    "flatpickr": "^4.6.13",
+    "isotope-layout": "^3.0.6",
+    "next": "15.3.0",
+    "quill": "^2.0.3",
+    "react": "^18.3.1",
+    "react-countup": "^6.5.3",
+    "react-dom": "^18.3.1",
+    "react-flatpickr": "^4.0.1",
+    "react-intersection-observer": "^9.16.0",
+    "react-modal-video": "^2.0.2",
+    "react-paginate": "^8.3.0",
+    "react-quill": "^2.0.0",
+    "react-range": "^1.10.0",
+    "react-redux": "^9.2.0",
+    "react-simple-star-rating": "^5.1.7",
+    "react-toastify": "^11.0.5",
+    "react-use": "^17.6.0",
+    "sass": "^1.86.3",
+    "swiper": "^11.2.6",
+    "uuid": "^11.1.0",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/isotope-layout": "^3.0.15",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/react-flatpickr": "^3.8.11",
+    "@types/react-modal-video": "^1.2.3",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.0",
+    "typescript": "^5"
+  }
+}

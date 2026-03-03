@@ -1,0 +1,433 @@
+@use '../utils' as *;
+
+/*=============================
+    	19. hero
+===============================*/
+
+.tg-hero{
+    &-slider{
+        &-active{
+            height: 740px;
+            @media #{$xs} {
+                height: 650px;
+            }
+        }
+    }
+    &-arrow{
+        &-box{
+            & button{
+                border-radius: 100px;
+                width: 45px;
+                height: 45px;
+                background: var(--tg-common-white);
+                color: var(--tg-theme-primary);
+                text-align: center;
+                line-height: 43px;
+                top: 59%;
+                z-index: 99;
+                left: 0;
+                position: absolute;
+                transform: translateY(-50%);
+                @include tg-transition();
+                @media #{$sm,$xs} {
+                    top: 90%;
+                }
+                &:hover{
+                    background: var(--tg-theme-primary);
+                    color: var(--tg-common-white);
+                }
+                &.tg-hero-prev{
+                    left: auto;
+                    right: 40px;
+                    z-index: 1;
+                    @media #{$md,$sm,$xs} {
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+    &-top{
+        &-shadow{
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 188px;
+            background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+            top: 0;
+            left: 0;
+            z-index: 9; 
+        }
+    }
+    &-bottom{
+        &-shape{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 9;
+            &-2{
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                z-index: 9;
+                & .line-1 {
+                    stroke-dasharray: 2300;
+                    stroke-dashoffset: 3500;
+                    animation: dash 5s linear forwards infinite;
+                } 
+            }
+            & .line-1 {
+                stroke-dasharray: 2300;
+                stroke-dashoffset: 3500;
+                animation: dash 5s linear forwards infinite;
+            }
+        }
+    }
+    &-bg{
+        &::before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+    }
+    &-thumb{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-animation: zoom 20s ease-in-out infinite;
+        animation: zoom 20s ease-in-out infinite;
+    }
+    &-content{
+        padding-top: 210px;
+        padding-bottom: 120px;
+        @media #{$xs} {
+            padding-top: 180px;
+            padding-bottom: 100px;
+        }
+        &-area{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9;
+            right: 0;
+            margin: 0 auto;
+            z-index: 9;
+        }
+    }
+    &-subtitle{
+        font-weight: 400;
+        color: var(--tg-common-white);
+        text-transform: capitalize;
+    }
+    &-title{
+        font-weight: 700;
+        font-size: 64px;
+        color: var(--tg-common-white);
+        border-bottom: 4px solid var(--tg-common-white);
+        display: inline-block;
+        @media #{$xs} {
+            font-size: 40px;
+        }
+    }
+    &-para{
+        color: var(--tg-common-white);
+        text-transform: capitalize;
+        @media #{$xs} {
+            & br{
+                display: none;
+            }
+        }
+    }
+    &-price{
+        &-wrap{
+            @media #{$xs} {
+                flex-wrap: wrap;
+            }
+            & p{
+                font-weight: 400;
+                font-size: 24px;
+                color: var(--tg-common-white);
+                margin-bottom: 0;
+                @media #{$xs} {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+        & span{
+            color: var(--tg-common-white);
+        }
+        & .hero-dolar{
+            font-size: 24px;
+            transform: translateY(-5px);
+            font-weight: 500;
+        }
+        & .hero-price{
+            font-weight: 700;
+            font-size: 40px;
+        }
+        & .night{
+            transform: translateY(5px);
+        }
+    }
+    &-2{
+        &-content{
+            padding: 250px 0 257px 0;
+            border-radius: 60px;
+            @media #{$md,$sm,$xs} {
+                padding: 170px 0 170px 0;
+            }
+        }
+        &-title{
+            font-family: var(--tg-ff-quentin);
+            font-weight: 400;
+            font-size: 80px;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+            @media #{$xs} {
+                font-size: 50px;
+            }
+        }
+    }
+    &-3{
+        &-spacing{
+            padding-top: 244px;
+            padding-bottom: 135px;
+        }
+        &-subtitle{
+            font-family: var(--tg-ff-quentin);
+            font-weight: 400;
+            font-size: 60px;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+            position: relative;
+            z-index: 1;
+            @media #{$sm,$xs} {
+                font-size: 35px;
+             }
+            &::before{
+                position: absolute;
+                content: "";
+                border-radius: 100px;
+                width: 440px;
+                height: 11px;
+                background: #3887ff;
+                bottom: 13px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                z-index: -1;
+                @media #{$sm,$xs} {
+                    display: none;
+                 }
+            }
+        }
+        &-title{
+            font-weight: 600;
+            font-size: 54px;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+            @media #{$xs} {
+                font-size: 40px;
+            }
+        }
+    }
+    &-4{
+        &-subtitle{
+            font-size: 65px;
+            @media #{$sm,$xs} {
+                font-size: 50px;
+            }
+            &::before{
+                display: none;
+            }
+        }
+        &-title{
+            font-size: 60px;
+            @media #{$sm,$xs} {
+                font-size: 50px;
+            }
+        }
+        &-space{
+            padding: 247px 0px 240px 0px;
+            @media #{$md,$sm,$xs} {
+                padding: 150px 0px 120px 0px;
+            }
+        }
+    }
+    &-5{
+        &-content{
+            & .tg-hero-3-subtitle{
+                display: inline-block;
+                font-size: 50px;
+                &::before{
+                    display: none;
+                }
+            }
+            & .tg-hero-3-title {
+                font-size: 45px;
+                @media #{$sm,$xs} {
+                    font-size: 37px;
+                }
+            }
+        }
+        &-top{
+            &-shadow{
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.52);
+                top: 0;
+                left: 0;
+                z-index: -1; 
+            }
+        }
+        &-title{
+            &-shape{
+                position: absolute;
+                bottom: -22px;
+                left: 17%;
+            }
+        }
+        &-spacing{
+            padding-top: 230px;
+            padding-bottom: 160px;
+        }
+    }
+    &-tu{
+        &-title{
+            font-weight: 700;
+            font-size: 50px;
+            text-transform: capitalize;
+            color: var(--tg-common-white);
+            @media #{$sm,$xs} {
+                font-size: 35px;
+            }
+            @media #{$xs} {
+                font-size: 25px;
+            }
+        }
+        &-wrapper{
+            & .tg-hero-title {
+                border: none;
+                font-size: 60px;
+                @media #{$sm} {
+                    font-size: 44px;
+                }
+                @media #{$xs} {
+                    font-size: 29px;
+                }
+            }
+            & .tg-hero-content {
+                padding-top: 225px;
+                padding-bottom: 190px;
+                @media #{$md,$sm} {
+                    padding-top: 175px;
+                    padding-bottom: 120px;
+                }
+                @media #{$xs} {
+                    padding-top: 100px;
+                    padding-bottom: 100px;
+                }
+            }
+        }
+        &-svg{
+            position: absolute;
+            right: -184px;
+            top: 6px;        
+        }
+        &-avatar{
+            &-text{
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 22px;
+                text-transform: capitalize;
+                text-decoration: underline;
+                text-decoration-skip-ink: none;
+                color: var(--tg-common-white);
+                font-family: var(--tg-ff-outfit);
+                text-align: left;
+            }
+        }
+        &-2{
+            &-wrapper{
+                padding-top: 140px;
+                padding-bottom: 100px;
+                @media #{$sm,$xs} {
+                    padding-top: 100px;
+                }
+                & .tg-hero-3-subtitle::before {
+                    display: none;
+                }
+                & .tg-hero-3-title {
+                    font-weight: 800;
+                    font-size: 60px;
+                    font-family: var(--tg-ff-outfit);
+                    @media #{$sm,$xs} {
+                        font-size: 40px;
+                    }
+                }
+                & .tg-booking-form-3 {
+                    box-shadow: none;
+                    padding: 33px 40px 27px 40px;
+                    @media #{$xl,$lg,$md,$sm,$xs} {
+                        padding: 23px 30px 14px 30px;
+                    }
+                }
+                & .tg-booking-form-parent-inner {
+                    @media #{$xl,$lg,$md,$sm,$xs} {
+                        margin-right: 8px;
+                    }
+                }
+                & .tg-booking-form-input-group {
+                    @media #{$lg,$md,$sm,$xs} {
+                        justify-content: center !important;
+                    }
+                }
+                & .tg-booking-form-search-btn .bk-search-button {
+                    background: var(--tg-theme-primary);
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    font-family: var(--tg-ff-outfit);
+                    padding: 10px 66px;
+                }
+                & .tg-booking-form-title {
+                    font-family: var(--tg-ff-outfit);
+                }
+                & .tg-booking-add-input-field {
+                    border: 0.60px solid #d7d7d7;
+                    background: #f3f3f4;
+                    font-family: var(--tg-ff-outfit);
+                    font-weight: 400;
+                    font-size: 15px;
+                    color: #737374;
+                }
+                & .tg-booking-add-input-date .input {
+                    border: 0.60px solid #d7d7d7;
+                    background: #f3f3f4;
+                    font-family: var(--tg-ff-outfit);
+                    font-weight: 400;
+                    font-size: 15px;
+                    &::placeholder{
+                        font-family: var(--tg-ff-outfit);
+                        font-weight: 400;
+                        font-size: 15px;
+                        color: #737374;
+                    }
+                }
+            }
+        }
+    }
+}

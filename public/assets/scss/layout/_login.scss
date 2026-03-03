@@ -1,0 +1,30 @@
+@use '../utils' as *;
+
+/*=============================
+    	30. login
+===============================*/
+.tg-login{
+    &-wrapper{
+        padding: 100px 85px 100px;
+        background: var(--tp-common-white);
+        box-shadow: 0px 30px 60px rgba(3, 4, 28, 0.1);
+        @media #{$xs} {
+            padding: 50px 25px 50px;
+        }
+    }
+    &-top{
+        & h2{
+            font-size: 34px;
+            letter-spacing: -0.04em;
+            margin-bottom: 6px;
+        }
+    }
+    &-navigate{
+        & a{
+            text-decoration: underline;
+            font-size: 15px;
+            text-transform: capitalize;
+            color: var(--tg-common-black);
+        }
+    }
+}

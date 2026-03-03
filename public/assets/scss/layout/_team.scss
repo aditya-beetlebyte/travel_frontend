@@ -1,0 +1,174 @@
+@use '../utils' as *;
+
+/*=============================
+    	27. team
+===============================*/
+
+.tg-team{
+    &-wrap{
+        border: 1px solid var(--tg-border-3);
+        border-radius: 30px;
+        overflow: hidden;
+        background: var(--tg-common-white);
+        &:hover{
+            & .hover-img{
+                transform: scale(1.1);
+            }
+        }
+    }
+    &-thumb{
+        background: #efefef;
+        padding: 17px 10px 0px 10px;
+        overflow: hidden;
+        height: 230px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        & img{
+            transition: all .4s ease;
+        }
+    }
+    &-content{
+        padding: 17px 10px 40px 10px;
+        & h5{
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 100%;
+            text-transform: capitalize;
+            margin-bottom: 4px;
+            & a{
+                &:hover{
+                    color: var(--tg-theme-primary);
+                }
+            }
+        }
+        & span{
+            font-weight: 400;
+            font-size: 16px;
+            text-transform: capitalize;
+            color: var(--tg-grey-1);
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+    }
+    &-social{
+        & a{
+            width: 36px;
+            height: 36px;
+            text-align: center;
+            line-height: 37px;
+            border-radius: 6px;
+            background: #f0e9ff;
+            display: inline-block;
+            color: var(--tg-theme-primary);
+            &:hover{
+                background: var(--tg-theme-primary);
+                color: var(--tg-common-white);
+            }
+        }
+    }
+    &-shape{
+        position: absolute;
+        bottom: 0;
+        left: 73px;
+        z-index: -1;
+        @media #{$xl,$lg,$md} {
+            left: 0;
+        }
+        &-2{
+            position: absolute;
+            bottom: 0;
+            right: 60px;
+            z-index: -1;
+            @media #{$xl,$lg,$md} {
+                right: 0;
+            }
+        }
+    }
+    &-details{
+        &-thumb{
+            & img{
+                border-radius: 30px;
+            }
+        }
+        &-head{
+            padding: 0;
+            & h5{
+                font-size: 30px;
+                margin-bottom: 8px;
+            }
+            & span{
+                color: var(--tg-theme-primary);
+                font-weight: 500;
+                margin-bottom: 22px;
+            }
+        }
+        &-contant{
+            &-wrap{
+                @media #{$lg,$md,$sm,$xs} {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+            }
+            & h6{
+                font-weight: 600;
+                font-size: 24px;
+                text-transform: capitalize;
+                color: var(--tg-common-black);
+            }
+            & p{
+                line-height: 22px;
+            }
+        }
+        &-contact{
+            text-transform: capitalize;
+            color: var(--tg-grey-1);
+            display: flex;
+            margin-bottom: 5px;
+            & span{
+                flex: 0 0 auto;
+            }
+            & a{
+                font-weight: 500;
+                font-size: 18px;
+                color: var(--tg-common-black);
+                &:hover{
+                    color: var(--tg-theme-primary);
+                }
+            }
+        }
+    }
+    &-progress {
+        background: var(--tg-border-3);
+        width: 100%;
+        height: 12px;
+        overflow: visible;
+        border-radius: 20px;
+        margin-bottom: 14px;
+  
+        &-title {
+            font-weight: 500;
+            font-size: 16px;
+            text-transform: capitalize;
+            color: var(--tg-grey-1);
+            margin-bottom: 12px;
+        }
+  
+        & .progress-bar {
+           background-color: var(--tg-theme-primary);
+           border-radius: 100px;
+           position: relative;
+           overflow: visible;
+           height: 100%;
+           & span {
+                position: absolute;
+                right: 0;
+                top: -32px;
+                font-weight: 500;
+                font-size: 16px;
+                text-transform: capitalize;
+                color: var(--tg-grey-1);
+           }
+        }
+    }
+}

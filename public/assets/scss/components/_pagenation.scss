@@ -1,0 +1,80 @@
+@use '../utils' as *;
+
+/*=============================
+	09. pagenation
+===============================*/
+
+.tg-pagenation{
+    &-wrap{
+        & nav{
+            display: inline-block;
+            & ul{
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                & li{
+                    margin-bottom: 5px;
+                    margin-right: 5px;
+                    & a{
+                        font-weight: 500;
+                        font-size: 14px;
+                        color: var(--tg-common-black);
+                        background: #f1f3f5;
+                        height: 44px;
+                        width: 44px;
+                        text-align: center;
+                        line-height: 44px;
+                        transition: all .4s ease;
+                        display: inline-block;
+                        border-radius: 8px;
+                        &:hover{
+                            color: var(--tg-common-white) !important;
+                            background: var(--tg-theme-primary);
+                        }
+                        &.active{
+                            color: var(--tg-common-white);
+                            background: var(--tg-theme-primary);
+                        }
+                        &.p-btn{
+                            height: auto;
+                            width: auto;
+                            line-height: 1;
+                            padding: 15px 30px;
+                            border-radius: 8px;
+                            @media #{$sm,$xs} {
+                                margin-right: 5px;
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+                    &.previous {
+                        margin-right: 25px;
+                        & a{
+                            height: auto;
+                            width: auto;
+                            line-height: 1;
+                            padding: 15px 30px;
+                            border-radius: 8px;
+                        }
+                    }
+                    &.next {
+                        margin-left: 25px;
+                        & a{
+                            height: auto;
+                            width: auto;
+                            line-height: 1;
+                            padding: 15px 30px;
+                            border-radius: 8px;
+                        }
+                    }
+                    &.selected{
+                        & a{
+                            color: var(--tg-common-white) !important;
+                            background: var(--tg-theme-primary);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

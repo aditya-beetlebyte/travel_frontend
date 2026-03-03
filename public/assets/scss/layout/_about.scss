@@ -1,0 +1,134 @@
+@use '../utils' as *;
+
+/*=============================
+    	01. about
+===============================*/
+.tg-about{
+    &-thumb{
+        &-wrap{
+            & img{
+                @media #{$md,$sm,$xs} {
+                   margin-bottom: 30px;
+                   width: 100%;
+                }
+            }
+        }
+        &-2{
+            float: right;
+            margin-right: -15px;
+            @media #{$lg,$md,$sm,$xs} {
+                margin: 0;
+            }
+        }
+        &-4{
+            margin-left: -15px;
+            @media #{$lg,$md,$sm,$xs} {
+                margin: 0;
+            }
+        }
+    }
+    &-content{
+        margin: 0 40px;
+        @media #{$lg,$md,$sm,$xs} {
+            margin: 0;
+        }
+    }
+    &-details{
+        &-shape{
+            right: 0;
+            bottom: 0;
+        }
+        &-map{
+            top: 0;
+            right: -30px;
+            @media #{$sm,$xs} {
+                right: 0;
+            }
+        }
+    }
+    &-su{
+        &-shape{
+            position: absolute;
+            top: 128px;
+            right: 6px;
+            &-2{
+                position: absolute;
+                left: 100px;
+                top: 30px;
+            }
+        }
+        &-funfact{
+            &-wrap{
+                display: flex;
+                column-gap: 60px;
+                flex-wrap: wrap;
+                @media #{$xs} {
+                    column-gap: 40px;
+                }
+            }
+            &-icon{
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+            }
+            &-text{
+                & h3{
+                    font-family: var(--tg-ff-outfit);
+                    font-weight: 700;
+                    font-size: 30px;
+                    text-transform: capitalize;
+                }
+                & span{
+                    font-family: var(--tg-ff-outfit);
+                    font-size: 17px;
+                    text-transform: capitalize;
+                    color: #353844;
+                }
+            }
+        }
+        &-author{
+            &-avatar{
+                & img{
+                    border-radius: 50%;
+                }
+            }
+            &-info{
+                & h5{
+                    font-family: var(--tg-ff-outfit);
+                    font-weight: 600;
+                    font-size: 20px;
+                    text-transform: capitalize;
+                    margin-bottom: 0;
+                }
+                & span{
+                    font-family: var(--tg-ff-outfit);
+                    font-weight: 400;
+                    font-size: 15px;
+                    text-transform: capitalize;
+                    color: var(--tg-grey-1);
+                }
+            }
+            &-wrap{
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+        &-right{
+            &-shape{
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: -1;
+                width: 10%;
+            }
+        }
+        &-content{
+            &-wrap{
+                @media #{$lg,$md,$sm,$xs} {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
