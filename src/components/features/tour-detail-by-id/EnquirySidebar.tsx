@@ -1,7 +1,8 @@
 "use client";
 import type { DataType } from "@/data/ListingData";
 
-const EnquirySidebar = ({ tour }: { tour: DataType }) => {
+const EnquirySidebar = ({ tour: _tour }: { tour: DataType }) => {
+   void _tour;
    return (
       <div>
          {/* Enquiry Form */}

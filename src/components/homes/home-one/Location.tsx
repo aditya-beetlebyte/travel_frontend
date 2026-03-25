@@ -57,7 +57,7 @@ const Location = () => {
                   </div>
                </div>
             </div>
-            <div className="row">
+            <div className="row">  
                <div className="col-12">
                   <Swiper {...setting} modules={[Autoplay, Navigation]} className="swiper-container tg-location-su-slider">
                      {location_data.filter((items) => items.page === "home_1").map((item) => (

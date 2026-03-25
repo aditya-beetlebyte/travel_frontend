@@ -3,7 +3,6 @@ import Link from "next/link"
 
 import logo from "@/assets/img/logo/logo-green.png"
 import MobileMenu from "./MobileMenu";
-import { useState } from "react";
 
 interface MobileSidebarProps {
    offCanvas: boolean;
@@ -11,18 +10,6 @@ interface MobileSidebarProps {
 }
 
 const Offcanvas = ({ offCanvas, setOffCanvas }: MobileSidebarProps) => {
-
-   const [searchValue, setSearchValue] = useState("");
-
-   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchValue(event.target.value);
-   };
-
-   const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      setSearchValue('');
-      setOffCanvas(false);
-   };
 
    return (
       <div className={offCanvas ? "mobile-menu-visible" : ""}>

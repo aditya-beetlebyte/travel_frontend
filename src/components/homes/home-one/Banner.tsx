@@ -1,7 +1,5 @@
 "use client"
 import Image from "next/image"
-import BannerFormOne from "@/components/common/banner-form/BannerFormOne"
-tel:+123595966
 import avatar from "@/assets/img/hero/tu/avatar.png"
 
 const Banner = () => {

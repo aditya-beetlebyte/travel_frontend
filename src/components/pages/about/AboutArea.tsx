@@ -1,6 +1,4 @@
 import Image from "next/image"
-import Button from "@/components/common/Button"
-import Link from "next/link"
 
 import shape_1 from "@/assets/img/about/details/shape.png"
 import shape_2 from "@/assets/img/about/details/shape-2.png"
