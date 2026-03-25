@@ -21,7 +21,7 @@ const CheckoutForm = () => {
                </div>
                <div className="col-lg-12">
                   <div className="tg-checkout-form-input mb-25">
-                     <input className="input" type="text" placeholder="Company Name" />
+                     <input className="input" type="text" placeholder=" Company Name" />
                   </div>
                </div>
                <div className="col-lg-12">

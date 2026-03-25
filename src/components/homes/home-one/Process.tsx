@@ -26,7 +26,7 @@ const process_data: DataType[] = [
    {
       id: 2,
       icon: (<><ProcessOne /></>),
-      title: "Best Travel Agency",
+      title: "Best Travel Company",
       desc: "Are you tired offer theare typical tourist new destination"
    },
    {

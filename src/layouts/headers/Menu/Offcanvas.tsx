@@ -33,14 +33,14 @@ const Offcanvas = ({ offCanvas, setOffCanvas }: MobileSidebarProps) => {
                   <Link href="/"><Image src={logo} alt="logo" /></Link>
                </div>
                <div className="tgmobile__search">
-                  <form onSubmit={handleSubmit}>
+                  {/* <form onSubmit={handleSubmit}>
                      <input
                         type="text"
                         placeholder="Search here..."
                         value={searchValue}
                         onChange={handleSearchChange}
                      />
-                  </form>
+                  </form> */}
                </div>
                <div className="tgmobile__menu-outer">
                   <MobileMenu />

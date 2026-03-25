@@ -47,256 +47,85 @@ const location_data: DataType[] = [
       id: 1,
       page: "home_1",
       thumb: location_1,
-      title: "Paris",
-      total: "05 ",
+      title: "Kaziranga & Meghalaya",
+      total: "05N / 06D",
    },
    {
       id: 2,
       page: "home_1",
       thumb: location_2,
-      title: "Australia",
-      total: "08",
+      title: "Mystic Meghalaya & Caves",
+      total: "05N / 06D",
    },
    {
       id: 3,
       page: "home_1",
       thumb: location_3,
-      title: "New York",
-      total: "06",
+      title: "Mystic Bhutan",
+      total: "06N / 07D",
    },
    {
       id: 4,
       page: "home_1",
       thumb: location_4,
-      title: "Spain City",
-      total: "07",
+      title: "Arunachal Tawang Explorer",
+      total: "06N / 07D",
    },
    {
       id: 5,
       page: "home_1",
+      thumb: location_1,
+      title: "Nongriat Root Bridge Trek",
+      total: "05N / 06D",
+   },
+   {
+      id: 6,
+      page: "home_1",
       thumb: location_2,
-      title: "Australia",
-      total: "08",
-   },
-
-   // home_2
-
-   {
-      id: 1,
-      page: "home_2",
-      thumb: location2_1,
-      title: "New York City",
-      class: "col-xl-3"
+      title: "Tawang Short Circuit",
+      total: "05N / 06D",
    },
    {
-      id: 2,
-      page: "home_2",
-      thumb: location2_2,
-      title: "Australia",
-      class: "col-xl-3"
+      id: 7,
+      page: "home_1",
+      thumb: location_3,
+      title: "Arunachal & Kaziranga Grand",
+      total: "07N / 08D",
    },
    {
-      id: 3,
-      page: "home_2",
-      thumb: location2_3,
-      title: "California City",
-      class: "col-xl-6"
+      id: 8,
+      page: "home_1",
+      thumb: location_4,
+      title: "Grand Arunachal & Nameri",
+      total: "08N / 09D",
    },
    {
-      id: 4,
-      page: "home_2",
-      thumb: location2_4,
-      title: "Japan",
-      class: "col-xl-6"
+      id: 9,
+      page: "home_1",
+      thumb: location_1,
+      title: "Meghalaya & Sacred Forest",
+      total: "07N / 08D",
    },
    {
-      id: 5,
-      page: "home_2",
-      thumb: location2_5,
-      title: "Spain City",
-      class: "col-xl-3"
+      id: 10,
+      page: "home_1",
+      thumb: location_2,
+      title: "Nongriat & Kamakhya",
+      total: "06N / 07D",
    },
    {
-      id: 6,
-      page: "home_2",
-      thumb: location2_6,
-      title: "Paris",
-      class: "col-xl-3"
-   },
-
-   // home_3
-
-   {
-      id: 1,
-      page: "home_3",
-      thumb: location3_1,
-      title: "Paris",
-      total: "05 ",
+      id: 11,
+      page: "home_1",
+      thumb: location_3,
+      title: "Complete Meghalaya Discovery",
+      total: "06N / 07D",
    },
    {
-      id: 2,
-      page: "home_3",
-      thumb: location3_2,
-      title: "Australia",
-      total: "08",
-   },
-   {
-      id: 3,
-      page: "home_3",
-      thumb: location3_3,
-      title: "New York",
-      total: "06",
-   },
-   {
-      id: 4,
-      page: "home_3",
-      thumb: location3_4,
-      title: "Spain City",
-      total: "07",
-   },
-
-   // home_5
-
-   {
-      id: 1,
-      page: "home_5",
-      thumb: location5_1,
-      title: "Paris",
-      total: "05 ",
-   },
-   {
-      id: 2,
-      page: "home_5",
-      thumb: location5_2,
-      title: "Australia",
-      total: "08",
-   },
-   {
-      id: 3,
-      page: "home_5",
-      thumb: location5_3,
-      title: "New York",
-      total: "06",
-   },
-   {
-      id: 4,
-      page: "home_5",
-      thumb: location5_4,
-      title: "Spain City",
-      total: "07",
-   },
-
-   // home_6
-
-   {
-      id: 1,
-      page: "home_6",
-      thumb: location3_1,
-      title: "Paris",
-      total: "05 ",
-   },
-   {
-      id: 2,
-      page: "home_6",
-      thumb: location3_2,
-      title: "Australia",
-      total: "08",
-   },
-   {
-      id: 3,
-      page: "home_6",
-      thumb: location3_3,
-      title: "New York",
-      total: "06",
-   },
-   {
-      id: 4,
-      page: "home_6",
-      thumb: location3_4,
-      title: "Spain City",
-      total: "07",
-   },
-
-   // home_7
-
-   {
-      id: 1,
-      page: "home_7",
-      thumb: food_img1,
-      title: "American",
-      total: "05",
-   },
-   {
-      id: 2,
-      page: "home_7",
-      thumb: food_img2,
-      title: "Mexican",
-      total: "12",
-   },
-   {
-      id: 3,
-      page: "home_7",
-      thumb: food_img3,
-      title: "Italian",
-      total: "11",
-   },
-   {
-      id: 4,
-      page: "home_7",
-      thumb: food_img4,
-      title: "Vegetarians",
-      total: "04",
-   },
-   {
-      id: 5,
-      page: "home_7",
-      thumb: food_img5,
-      title: "Japanese",
-      total: "13",
-   },
-
-   // home_7_2
-   {
-      id: 1,
-      page: "home_7_2",
-      thumb: location7_1,
-      title: "New york City",
-      total: "05",
-   },
-   {
-      id: 2,
-      page: "home_7_2",
-      thumb: location7_2,
-      title: "Australia",
-      total: "07",
-   },
-   {
-      id: 3,
-      page: "home_7_2",
-      thumb: location7_3,
-      title: "Switzerland",
-      total: "12",
-   },
-   {
-      id: 4,
-      page: "home_7_2",
-      thumb: location7_4,
-      title: "Japan City",
-      total: "03",
-   },
-   {
-      id: 5,
-      page: "home_7_2",
-      thumb: location7_2,
-      title: "Australia",
-      total: "07",
-   },
-   {
-      id: 6,
-      page: "home_7_2",
-      thumb: location7_3,
-      title: "Switzerland",
-      total: "12",
+      id: 12,
+      page: "home_1",
+      thumb: location_4,
+      title: "Kaziranga & Meghalaya Highlights",
+      total: "05N / 06D",
    },
 ];
 

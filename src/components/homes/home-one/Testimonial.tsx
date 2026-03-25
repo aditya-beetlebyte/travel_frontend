@@ -26,21 +26,21 @@ const testi_data: DataType[] = [
    {
       id: 1,
       name: "Mr.Robey Alexa",
-      designation: "CEO, logistra Agency",
+      designation: "CEO, logistra Company",
       rating: ["fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star",],
       desc: (<>“ Morem ipsum dolor sit amet, consectetur adipisc Service follwing arrea fowlwo awing  elita florai sum dolor sit amet, consectetur area raweaeaw ecall edBorem<br /> ipsum dolor sit amet, consectetur.”</>),
    },
    {
       id: 2,
       name: "Jamie L. Jorgensen",
-      designation: "CEO, logistra Agency",
+      designation: "CEO, logistra Company",
       rating: ["fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star",],
       desc: (<>“ Morem ipsum dolor sit amet, consectetur adipisc Service follwing arrea fowlwo awing  elita florai sum dolor sit amet, consectetur area raweaeaw ecall edBorem<br /> ipsum dolor sit amet, consectetur.”</>),
    },
    {
       id: 3,
       name: "Mr.Robey Alexa",
-      designation: "CEO, logistra Agency",
+      designation: "CEO, logistra Company",
       rating: ["fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star",],
       desc: (<>“ Morem ipsum dolor sit amet, consectetur adipisc Service follwing arrea fowlwo awing  elita florai sum dolor sit amet, consectetur area raweaeaw ecall edBorem<br /> ipsum dolor sit amet, consectetur.”</>),
    },
@@ -54,7 +54,7 @@ const testi_data: DataType[] = [
    {
       id: 5,
       name: "Jamie L. Jorgensen",
-      designation: "CEO, logistra Agency",
+      designation: "CEO, logistra Company",
       rating: ["fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star", "fa-sharp fa-solid fa-star",],
       desc: (<>“ Morem ipsum dolor sit amet, consectetur adipisc Service follwing arrea fowlwo awing  elita florai sum dolor sit amet, consectetur area raweaeaw ecall edBorem<br /> ipsum dolor sit amet, consectetur.”</>),
    },

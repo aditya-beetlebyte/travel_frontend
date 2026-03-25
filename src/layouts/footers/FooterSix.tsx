@@ -71,21 +71,21 @@ const FooterSix = () => {
                                     +123 888 9999
                                  </Link>
                               </li>
-                              <li className="d-flex">
+                              {/* <li className="d-flex">
                                  <span className="mr-15">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                        <path d="M11.9987 5.60006V12.0001L16.2654 14.1334M22.6654 12.0002C22.6654 17.8912 17.8897 22.6668 11.9987 22.6668C6.10766 22.6668 1.33203 17.8912 1.33203 12.0002C1.33203 6.10912 6.10766 1.3335 11.9987 1.3335C17.8897 1.3335 22.6654 6.10912 22.6654 12.0002Z" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                  </span>
-                                 <p className="mb-0">
+                                 {/* <p className="mb-0">
                                     Mon – Sat: 8 am – 5 pm,<br />
                                     Sunday: <span className="text-white d-inline-block">CLOSED</span>
-                                 </p>
-                              </li>
+                                 </p> */}
+                              {/* </li> */}
                            </ul>
                         </div>
                      </div>
-                     <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                     {/* <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                         <div className="tg-footer-widget tg-footer-link mb-40">
                            <h3 className="tg-footer-widget-title mb-25">Utility Pages</h3>
                            <ul>
@@ -96,7 +96,7 @@ const FooterSix = () => {
                               <li><Link href="#">License</Link></li>
                            </ul>
                         </div>
-                     </div>
+                     </div> */}
                   </div>
                </div>
             </div>
