@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { login } from "@/services/authApi";
+import { authAdminToUser, getSetupStatus, login } from "@/services/authApi";
 import { setAuth } from "@/redux/features/authSlice";
 import { RootState } from "@/redux/store";
 
@@ -28,6 +28,8 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
+  /** Hide setup only after API confirms a super admin exists. Default: show link (works if API fails or env is wrong). */
+  const [hideSetupLink, setHideSetupLink] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
@@ -35,6 +37,14 @@ const LoginForm = () => {
   useEffect(() => {
     if (isAuthenticated) router.replace("/admin");
   }, [isAuthenticated, router]);
+
+  useEffect(() => {
+    getSetupStatus()
+      .then((d) => setHideSetupLink(d.hasSuperAdmin === true))
+      .catch(() => setHideSetupLink(false));
+  }, []);
+
+  const showSetup = !hideSetupLink;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,10 +57,12 @@ const LoginForm = () => {
     try {
       const data = await login(email.trim(), password);
       if (data.success && data.token && data.admin) {
+        const permissions = data.permissions ?? {};
         dispatch(
           setAuth({
             token: data.token,
-            user: { id: data.admin.id, email: data.admin.email },
+            user: authAdminToUser(data.admin),
+            permissions,
           })
         );
         toast.success("Signed in successfully");
@@ -142,7 +154,7 @@ const LoginForm = () => {
               </label>
             </div>
             <div className="tg-login-navigate mb-25">
-              <Link href="/register">Register Now</Link>
+              {showSetup && <Link href="/setup">First-time setup</Link>}
             </div>
           </div>
           <button
@@ -152,6 +164,28 @@ const LoginForm = () => {
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
+          {showSetup && (
+            <div className="text-center mb-0" style={{ marginTop: 20 }}>
+              <p style={{ margin: "0 0 12px", fontSize: 14, color: "#64748b" }}>
+                New installation or no super admin yet?
+              </p>
+              <Link
+                href="/setup"
+                className="tg-btn d-inline-block"
+                style={{
+                  background: "#6366f1",
+                  color: "#fff",
+                  textDecoration: "none",
+                  padding: "12px 24px",
+                  borderRadius: 8,
+                  fontWeight: 600,
+                  fontSize: 14,
+                }}
+              >
+                Create super admin (first-time setup)
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </form>

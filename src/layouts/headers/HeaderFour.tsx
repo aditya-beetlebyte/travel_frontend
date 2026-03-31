@@ -59,14 +59,6 @@ const HeaderFour = () => {
                                  <Link href="tel:+123595966">+123 5959 66</Link>
                               </div>
                            </div>
-                           <div className="tg-header-btn ml-20 d-none d-sm-block">
-                              <Link className="tg-btn-header" href="/login">
-                                 <span>
-                                    <UserIcon />
-                                 </span>
-                                 Login
-                              </Link>
-                           </div>
                            <div className="tg-header-menu-bar lh-1 p-relative pl-20 d-block d-xl-none">
                               <button onClick={() => setOffCanvas(true)} style={{ cursor: "pointer" }} className="tgmenu-offcanvas-open-btn mobile-nav-toggler mobile-nav-black">
                                  <span></span>

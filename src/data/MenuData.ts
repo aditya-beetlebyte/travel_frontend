@@ -19,6 +19,12 @@ const menu_data: MenuItem[] = [
         has_dropdown: false,
     },
     {
+        id: 2,
+        title: "About Us",
+        link: "/about",
+        has_dropdown: false,
+    },
+    {
         id: 4,
         title: "Blogs",
         link: "/blog-grid",

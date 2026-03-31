@@ -53,14 +53,6 @@ const HeaderOne = () => {
                                  <Link href="tel:+123595966">+123 5959 66</Link>
                               </div>
                            </div>
-                           <div className="tg-header-btn ml-20 d-none d-sm-block">
-                              <Link className="tg-btn-header" href="/login">
-                                 <span>
-                                    <UserIcon />
-                                 </span>
-                                 Login
-                              </Link>
-                           </div>
                            <div className="tg-header-menu-bar p-relative">
                               <button onClick={() => setOffCanvas(true)} style={{ cursor: "pointer" }} className="tgmenu-offcanvas-open-btn mobile-nav-toggler d-block d-xl-none ml-10">
                                  <span></span>

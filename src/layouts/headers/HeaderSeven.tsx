@@ -50,14 +50,6 @@ const HeaderSeven = () => {
                               </button>
                               <HeaderCart />
                            </div>
-                           <div className="tg-header-btn ml-20 d-none d-sm-block">
-                              <Link className="tg-btn-header" href="/login">
-                                 <span>
-                                    <UserIcon />
-                                 </span>
-                                 Login
-                              </Link>
-                           </div>
                            <div className="tg-header-menu-bar lh-1 p-relative ml-20 pl-20">
                               <span className="tg-header-border d-none d-xl-block"></span>
                               <button onClick={() => setSidebar(true)} className="tgmenu-offcanvas-open-btn menu-tigger d-none d-xl-block">

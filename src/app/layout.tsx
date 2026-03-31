@@ -4,6 +4,7 @@ import "../../public/assets/scss/main.scss";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import store from "@/redux/store";
+import AuthSync from "@/components/AuthSync";
 
 export default function RootLayout({
   children,
@@ -26,6 +27,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning={true}>
         <Provider store={store}>
+          <AuthSync />
           {children}
           <ToastContainer
             position="top-center"

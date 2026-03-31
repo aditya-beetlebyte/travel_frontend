@@ -37,7 +37,7 @@ const Sidebar = ({ sidebar, setSidebar }: SidebarProps) => {
                <Link href="/"><i className="fab fa-facebook-f"></i></Link>
                <Link href="/"><i className="fab fa-twitter"></i></Link>
                <Link href="/"><i className="fab fa-google-plus-g"></i></Link>
-               <Link href="/"><i className="fab fa-instagram"></i></Link>
+               <Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54"><i className="fab fa-instagram"></i></Link>
             </div>
          </div>
          <div onClick={() => setSidebar(false)} className={`offCanvas__overly ${sidebar ? "active" : ""}`}></div>

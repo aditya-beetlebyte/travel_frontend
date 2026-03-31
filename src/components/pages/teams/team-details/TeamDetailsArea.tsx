@@ -25,7 +25,7 @@ const TeamDetailsArea = () => {
                         <div className="tg-team-social">
                            <Link href="#"><i className="fa-brands fa-facebook-f"></i></Link>
                            <Link href="#"><i className="fa-brands fa-twitter"></i></Link>
-                           <Link href="#"><i className="fa-brands fa-instagram"></i></Link>
+                           <Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54"><i className="fa-brands fa-instagram"></i></Link>
                            <Link href="#"><i className="fa-brands fa-pinterest-p"></i></Link>
                         </div>
                      </div>

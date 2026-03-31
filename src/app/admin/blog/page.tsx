@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { RootState } from "@/redux/store";
+import { can } from "@/utils/permissions";
 import type { Blog } from "@/services/blogApi";
 import {
   fetchBlogs,
@@ -27,6 +31,13 @@ const DEFAULT_CATEGORIES = [
 ];
 
 export default function AdminBlogPage() {
+  const permissions = useSelector((s: RootState) => s.auth.permissions);
+  const isSuperAdmin = useSelector((s: RootState) => !!s.auth.user?.isSuperAdmin);
+  const canRead = can(permissions, isSuperAdmin, "blogs", "read");
+  const canCreate = can(permissions, isSuperAdmin, "blogs", "create");
+  const canUpdate = can(permissions, isSuperAdmin, "blogs", "update");
+  const canDelete = can(permissions, isSuperAdmin, "blogs", "delete");
+
   const [publishedBlogs, setPublishedBlogs] = useState<Blog[]>([]);
   const [draftBlogs, setDraftBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
@@ -88,6 +99,7 @@ export default function AdminBlogPage() {
   }, []);
 
   const openCreate = () => {
+    if (!canCreate) return;
     setEditingId(null);
     setForm({
       title: "",
@@ -104,6 +116,7 @@ export default function AdminBlogPage() {
   };
 
   const openEdit = async (id: string) => {
+    if (!canUpdate) return;
     try {
       const blog = await fetchBlog(id);
       setEditingId(id);
@@ -159,6 +172,8 @@ export default function AdminBlogPage() {
   };
 
   const submitBlog = async (status: "draft" | "published") => {
+    if (editingId && !canUpdate) return;
+    if (!editingId && !canCreate) return;
     setSaving(true);
     try {
       const normalizedSlug = (form.slug || "").trim();
@@ -185,6 +200,7 @@ export default function AdminBlogPage() {
   };
 
   const handleDelete = async (id: string) => {
+    if (!canDelete) return;
     showConfirmToast("Delete this blog?", async () => {
       setDeletingId(id);
       try {
@@ -201,6 +217,20 @@ export default function AdminBlogPage() {
   };
 
   const wordCount = form.content.replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length;
+
+  if (!canRead) {
+    return (
+      <div>
+        <div style={{ marginBottom: 24 }}>
+          <AdminBackButton onClick={() => window.history.back()} />
+        </div>
+        <p className={styles.pageSubtitle}>You don&apos;t have permission to view blog management.</p>
+        <Link href="/admin" className={styles.btnPrimary} style={{ display: "inline-block", marginTop: 16 }}>
+          Back to dashboard
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -223,9 +253,11 @@ export default function AdminBlogPage() {
             </p>
           </div>
         </div>
-        <button type="button" onClick={openCreate} className={styles.btnPrimary}>
-          Add New Post
-        </button>
+        {canCreate && (
+          <button type="button" onClick={openCreate} className={styles.btnPrimary}>
+            Add New Post
+          </button>
+        )}
       </div>
 
       {formOpen && (
@@ -526,12 +558,16 @@ export default function AdminBlogPage() {
                 Status: <strong>{form.status}</strong>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <button type="button" onClick={handleSaveDraft} disabled={saving} className={styles.btnSecondary}>
-                  Save Draft
-                </button>
-                <button type="button" onClick={handlePublish} disabled={saving} className={styles.btnPrimary}>
-                  {saving ? "Saving..." : "Publish"}
-                </button>
+                {(canCreate || canUpdate) && (
+                  <>
+                    <button type="button" onClick={handleSaveDraft} disabled={saving} className={styles.btnSecondary}>
+                      Save Draft
+                    </button>
+                    <button type="button" onClick={handlePublish} disabled={saving} className={styles.btnPrimary}>
+                      {saving ? "Saving..." : "Publish"}
+                    </button>
+                  </>
+                )}
                 <button type="button" onClick={closeForm} className={styles.btnSecondary}>
                   Cancel
                 </button>
@@ -655,17 +691,22 @@ export default function AdminBlogPage() {
                             <td>{b.title}</td>
                             <td>{b.author || "—"}</td>
                             <td>
-                              <button type="button" onClick={() => openEdit(b._id)} className={styles.btnSecondary} style={{ marginRight: 8 }}>
-                                Edit
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleDelete(b._id)}
-                                disabled={deletingId === b._id}
-                                className={styles.btnDanger}
-                              >
-                                {deletingId === b._id ? "Deleting..." : "Delete"}
-                              </button>
+                              {canUpdate && (
+                                <button type="button" onClick={() => openEdit(b._id)} className={styles.btnSecondary} style={{ marginRight: 8 }}>
+                                  Edit
+                                </button>
+                              )}
+                              {canDelete && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleDelete(b._id)}
+                                  disabled={deletingId === b._id}
+                                  className={styles.btnDanger}
+                                >
+                                  {deletingId === b._id ? "Deleting..." : "Delete"}
+                                </button>
+                              )}
+                              {!canUpdate && !canDelete && "—"}
                             </td>
                           </tr>
                         ))}
@@ -696,17 +737,22 @@ export default function AdminBlogPage() {
                             <td>{b.title}</td>
                             <td>{b.author || "—"}</td>
                             <td>
-                              <button type="button" onClick={() => openEdit(b._id)} className={styles.btnSecondary} style={{ marginRight: 8 }}>
-                                Edit
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleDelete(b._id)}
-                                disabled={deletingId === b._id}
-                                className={styles.btnDanger}
-                              >
-                                {deletingId === b._id ? "Deleting..." : "Delete"}
-                              </button>
+                              {canUpdate && (
+                                <button type="button" onClick={() => openEdit(b._id)} className={styles.btnSecondary} style={{ marginRight: 8 }}>
+                                  Edit
+                                </button>
+                              )}
+                              {canDelete && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleDelete(b._id)}
+                                  disabled={deletingId === b._id}
+                                  className={styles.btnDanger}
+                                >
+                                  {deletingId === b._id ? "Deleting..." : "Delete"}
+                                </button>
+                              )}
+                              {!canUpdate && !canDelete && "—"}
                             </td>
                           </tr>
                         ))}

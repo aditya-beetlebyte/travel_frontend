@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { logout } from "@/redux/features/authSlice";
-import { showConfirmToast } from "@/utils/confirmToast";
+import { can } from "@/utils/permissions";
 import styles from "./admin.module.css";
 
 const NavIcon = ({ d, className }: { d: string; className?: string }) => (
@@ -26,7 +26,15 @@ export default function AdminLayout({
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
+  const permissions = useSelector((state: RootState) => state.auth.permissions);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const isSuperAdmin = !!user?.isSuperAdmin;
   const [mounted, setMounted] = useState(false);
+
+  const canBlog = can(permissions, isSuperAdmin, "blogs", "read");
+  const canOffers = can(permissions, isSuperAdmin, "offers", "read");
+  const canUsers = can(permissions, isSuperAdmin, "users", "read");
+  const canEnquiry = can(permissions, isSuperAdmin, "enquiry", "read");
 
   useEffect(() => {
     setMounted(true);
@@ -40,10 +48,11 @@ export default function AdminLayout({
   }, [mounted, isAuthenticated, router]);
 
   const handleLogout = () => {
-    showConfirmToast("Do you want to log out?", () => {
-      dispatch(logout());
-      router.replace("/login");
-    });
+    const confirmed =
+      typeof window === "undefined" ? true : window.confirm("Do you want to log out?");
+    if (!confirmed) return;
+    dispatch(logout());
+    router.replace("/login");
   };
 
   if (!mounted) {
@@ -77,32 +86,63 @@ export default function AdminLayout({
             <NavIcon d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10" />
             Dashboard
           </Link>
-          <Link
-            href="/admin/blog"
-            className={pathname.startsWith("/admin/blog") ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
-            onClick={(e) => {
-              if (pathname.startsWith("/admin/blog")) {
-                e.preventDefault();
-                window.dispatchEvent(new CustomEvent("admin-refresh-blog"));
-              }
-            }}
-          >
-            <NavIcon d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7 M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-            Blog
-          </Link>
-          <Link
-            href="/admin/offers"
-            className={pathname.startsWith("/admin/offers") ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
-            onClick={(e) => {
-              if (pathname.startsWith("/admin/offers")) {
-                e.preventDefault();
-                window.dispatchEvent(new CustomEvent("admin-refresh-offers"));
-              }
-            }}
-          >
-            <NavIcon d="M12 8v13m0-13V6a2 2 0 1 1 2 2h-2zm0 0V5.5A2.5 2.5 0 1 0 9.5 8H12zm-7 4h14M5 12a2 2 0 1 1 0 4h14a2 2 0 1 1 0-4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
-            Offers
-          </Link>
+          {canBlog && (
+            <Link
+              href="/admin/blog"
+              className={pathname.startsWith("/admin/blog") ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
+              onClick={(e) => {
+                if (pathname.startsWith("/admin/blog")) {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent("admin-refresh-blog"));
+                }
+              }}
+            >
+              <NavIcon d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7 M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              Blog
+            </Link>
+          )}
+          {canOffers && (
+            <Link
+              href="/admin/offers"
+              className={pathname.startsWith("/admin/offers") ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
+              onClick={(e) => {
+                if (pathname.startsWith("/admin/offers")) {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent("admin-refresh-offers"));
+                }
+              }}
+            >
+              <NavIcon d="M12 8v13m0-13V6a2 2 0 1 1 2 2h-2zm0 0V5.5A2.5 2.5 0 1 0 9.5 8H12zm-7 4h14M5 12a2 2 0 1 1 0 4h14a2 2 0 1 1 0-4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
+              Offers
+            </Link>
+          )}
+          {canUsers && (
+            <Link
+              href="/admin/rbac/users"
+              className={pathname.startsWith("/admin/rbac/users") ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
+            >
+              <NavIcon d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+              Users
+            </Link>
+          )}
+          {canEnquiry && (
+            <Link
+              href="/admin/enquiries"
+              className={pathname.startsWith("/admin/enquiries") ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
+            >
+              <NavIcon d="M3 5h18M3 12h18M3 19h18" />
+              Enquiries
+            </Link>
+          )}
+          {isSuperAdmin && (
+            <Link
+              href="/admin/rbac/roles"
+              className={pathname.startsWith("/admin/rbac/roles") ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
+            >
+              <NavIcon d="M12 2v4 M12 18v4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M2 12h4 M18 12h4 M4.93 19.07l2.83-2.83 M16.24 7.76l2.83-2.83" />
+              Roles
+            </Link>
+          )}
         </nav>
         <div className={styles.sidebarFooter}>
           <button type="button" onClick={handleLogout} className={styles.logoutBtn}>

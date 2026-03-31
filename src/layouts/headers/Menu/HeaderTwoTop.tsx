@@ -31,7 +31,7 @@ const HeaderTwoTop = () => {
                            </Link>
                         </li>
                         <li>
-                           <Link href="#">
+                           <Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54">
                               <InstagramIcon />
                            </Link>
                         </li>

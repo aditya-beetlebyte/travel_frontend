@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { RootState } from "@/redux/store";
+import { can } from "@/utils/permissions";
 import type { Offer } from "@/services/offerApi";
 import {
   fetchOffers,
@@ -16,6 +20,13 @@ import styles from "../admin.module.css";
 import AdminBackButton from "../AdminBackButton";
 
 export default function AdminOffersPage() {
+  const permissions = useSelector((s: RootState) => s.auth.permissions);
+  const isSuperAdmin = useSelector((s: RootState) => !!s.auth.user?.isSuperAdmin);
+  const canRead = can(permissions, isSuperAdmin, "offers", "read");
+  const canCreate = can(permissions, isSuperAdmin, "offers", "create");
+  const canUpdate = can(permissions, isSuperAdmin, "offers", "update");
+  const canDelete = can(permissions, isSuperAdmin, "offers", "delete");
+
   const [offers, setOffers] = useState<Offer[]>([]);
   const [loading, setLoading] = useState(true);
   const [formOpen, setFormOpen] = useState(false);
@@ -89,6 +100,7 @@ export default function AdminOffersPage() {
   }, []);
 
   const openCreate = () => {
+    if (!canCreate) return;
     setEditingId(null);
     setForm({
       title: "",
@@ -105,6 +117,7 @@ export default function AdminOffersPage() {
   };
 
   const openEdit = async (id: string) => {
+    if (!canUpdate) return;
     try {
       const offer = await fetchOffer(id);
       setEditingId(id);
@@ -134,6 +147,8 @@ export default function AdminOffersPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (editingId && !canUpdate) return;
+    if (!editingId && !canCreate) return;
     const message = editingId
       ? "Do you want to update this offer?"
       : "Do you want to create this offer?";
@@ -171,6 +186,7 @@ export default function AdminOffersPage() {
   };
 
   const handleDelete = async (id: string) => {
+    if (!canDelete) return;
     showConfirmToast("Delete this offer?", async () => {
       setDeletingId(id);
       try {
@@ -186,6 +202,20 @@ export default function AdminOffersPage() {
     });
   };
 
+  if (!canRead) {
+    return (
+      <div>
+        <div style={{ marginBottom: 24 }}>
+          <AdminBackButton onClick={() => window.history.back()} />
+        </div>
+        <p className={styles.pageSubtitle}>You don&apos;t have permission to view offers management.</p>
+        <Link href="/admin" className={styles.btnPrimary} style={{ display: "inline-block", marginTop: 16 }}>
+          Back to dashboard
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
@@ -196,9 +226,11 @@ export default function AdminOffersPage() {
             <p className={styles.pageSubtitle}>Manage deals and special travel offers</p>
           </div>
         </div>
-        <button type="button" onClick={openCreate} className={styles.btnPrimary}>
-          Add Offer
-        </button>
+        {canCreate && (
+          <button type="button" onClick={openCreate} className={styles.btnPrimary}>
+            Add Offer
+          </button>
+        )}
       </div>
 
       {formOpen && (
@@ -351,9 +383,11 @@ export default function AdminOffersPage() {
               </label>
             </div>
             <div className={styles.formActions}>
-              <button type="submit" disabled={saving} className={styles.btnPrimary}>
-                {saving ? "Saving..." : "Save"}
-              </button>
+              {(canCreate || canUpdate) && (
+                <button type="submit" disabled={saving} className={styles.btnPrimary}>
+                  {saving ? "Saving..." : "Save"}
+                </button>
+              )}
               <button type="button" onClick={closeForm} className={styles.btnSecondary}>
                 Cancel
               </button>
@@ -392,17 +426,22 @@ export default function AdminOffersPage() {
                   </td>
                   <td>{o.active ? "Yes" : "No"}</td>
                   <td>
-                    <button type="button" onClick={() => openEdit(o._id)} className={styles.btnSecondary} style={{ marginRight: 8 }}>
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(o._id)}
-                      disabled={deletingId === o._id}
-                      className={styles.btnDanger}
-                    >
-                      {deletingId === o._id ? "Deleting..." : "Delete"}
-                    </button>
+                    {canUpdate && (
+                      <button type="button" onClick={() => openEdit(o._id)} className={styles.btnSecondary} style={{ marginRight: 8 }}>
+                        Edit
+                      </button>
+                    )}
+                    {canDelete && (
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(o._id)}
+                        disabled={deletingId === o._id}
+                        className={styles.btnDanger}
+                      >
+                        {deletingId === o._id ? "Deleting..." : "Delete"}
+                      </button>
+                    )}
+                    {!canUpdate && !canDelete && "—"}
                   </td>
                 </tr>
               ))}

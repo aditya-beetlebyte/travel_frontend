@@ -48,14 +48,6 @@ const HeaderTwo = () => {
                                  <Link href="tel:+123595966">+123 5959 66</Link>
                               </div>
                            </div>
-                           <div className="tg-header-btn ml-30 d-none d-sm-block">
-                              <Link className="tg-btn-header" href="/login">
-                                 <span>
-                                    <UserIcon />
-                                 </span>
-                                 Login
-                              </Link>
-                           </div>
                            <div className="tg-header-menu-bar lh-1 p-relative ml-15">
                               <button onClick={() => setSidebar(true)} style={{ cursor: "pointer" }} className="tgmenu-offcanvas-open-btn menu-tigger d-none d-xl-block">
                                  <span></span>
