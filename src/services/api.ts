@@ -20,28 +20,9 @@ export async function apiFetch(
   path: string,
   options: RequestInit = {}
 ): Promise<Response> {
-  const base = getApiUrl();
-  const url = `${base}${path}`;
-  // #region agent log
-  try {
-    fetch('http://127.0.0.1:7479/ingest/c43f454a-2b75-4e7e-8a3b-173fb7a44b86', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '4dcbac' }, body: JSON.stringify({ sessionId: '4dcbac', location: 'api.ts:apiFetch:before', message: 'fetch URL', data: { url, base }, timestamp: Date.now(), hypothesisId: 'H1-H3' }) }).catch(() => {});
-  } catch {}
-  // #endregion
-  let res: Response;
-  try {
-    res = await fetch(url, {
-      ...options,
-      headers: { ...getAuthHeaders(), ...options.headers },
-    });
-  } catch (e) {
-    // #region agent log
-    fetch('http://127.0.0.1:7479/ingest/c43f454a-2b75-4e7e-8a3b-173fb7a44b86', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '4dcbac' }, body: JSON.stringify({ sessionId: '4dcbac', location: 'api.ts:apiFetch:catch', message: 'fetch threw', data: { err: String(e) }, timestamp: Date.now(), hypothesisId: 'H1-H4' }) }).catch(() => {});
-    // #endregion
-    throw e;
-  }
-  // #region agent log
-  const acao = res.headers.get('Access-Control-Allow-Origin') ?? '(none)';
-  fetch('http://127.0.0.1:7479/ingest/c43f454a-2b75-4e7e-8a3b-173fb7a44b86', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '4dcbac' }, body: JSON.stringify({ sessionId: '4dcbac', location: 'api.ts:apiFetch:after', message: 'response', data: { status: res.status, ok: res.ok, type: res.type, url: res.url, accessControlAllowOrigin: acao }, timestamp: Date.now(), hypothesisId: 'H2-H4-H5' }) }).catch(() => {});
-  // #endregion
-  return res;
+  const url = `${getApiUrl()}${path}`;
+  return fetch(url, {
+    ...options,
+    headers: { ...getAuthHeaders(), ...options.headers },
+  });
 }

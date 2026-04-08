@@ -99,29 +99,6 @@ export default function AdminUsersPage() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // #region agent log
-    fetch("http://127.0.0.1:7265/ingest/3ed4c59b-5aa3-4c2b-b566-e44cbb30c736", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Debug-Session-Id": "a9384c",
-      },
-      body: JSON.stringify({
-        sessionId: "a9384c",
-        runId: "assign-role-sales",
-        hypothesisId: "H1",
-        location: "frontend/users/page.tsx:submit",
-        message: "Submitting admin user form",
-        data: {
-          editingId: editing?.id ?? null,
-          formRoleId,
-          hasMatchingRole: roles.some((r) => r.id === formRoleId),
-          nonSuperRoleIds: nonSuperRoles.map((r) => r.id),
-        },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion agent log
     setSaving(true);
     try {
       if (editing) {

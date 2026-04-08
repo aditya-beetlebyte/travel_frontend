@@ -125,31 +125,6 @@ export default function AdminRolesPage() {
     e.preventDefault();
     const trimmed = name.trim();
     const trimmedType = type.trim();
-    // #region agent log
-    fetch("http://127.0.0.1:7265/ingest/3ed4c59b-5aa3-4c2b-b566-e44cbb30c736", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Debug-Session-Id": "a9384c",
-      },
-      body: JSON.stringify({
-        sessionId: "a9384c",
-        runId: "role-type-save",
-        hypothesisId: "R1",
-        location: "frontend/roles/page.tsx:submit",
-        message: "Submitting role form",
-        data: {
-          formMode,
-          editingId,
-          rawType: type,
-          trimmedType,
-          rawName: name,
-          trimmedName: trimmed,
-        },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion agent log
     if (!trimmed) {
       toast.error("Role name required");
       return;
