@@ -214,6 +214,7 @@ export async function listRoles(): Promise<{ success: boolean; data: RoleDto[] }
 
 export async function createRole(body: {
   name: string;
+  type?: string;
   isSuperAdmin?: boolean;
   permissions?: PermissionsMap;
 }): Promise<{ success: boolean; data: RoleDto }> {
@@ -229,7 +230,7 @@ export async function createRole(body: {
 
 export async function updateRole(
   id: string,
-  body: Partial<{ name: string; isSuperAdmin: boolean; permissions: PermissionsMap }>
+  body: Partial<{ name: string; type: string; isSuperAdmin: boolean; permissions: PermissionsMap }>
 ): Promise<{ success: boolean; data: RoleDto }> {
   const res = await fetch(`${getApiUrl()}/api/admin/roles/${id}`, {
     method: "PATCH",

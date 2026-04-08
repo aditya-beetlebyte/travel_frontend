@@ -226,7 +226,7 @@ export default function AdminUsersPage() {
                 value={formRoleId}
                 onChange={(e) => setFormRoleId(e.target.value)}
                 required
-                disabled={Boolean(editing) && (!canUpdate || editing.isSuperAdmin)}
+                disabled={editing != null && (!canUpdate || editing.isSuperAdmin)}
               >
                 {nonSuperRoles.map((r) => (
                   <option key={r.id} value={r.id}>

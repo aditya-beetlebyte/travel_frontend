@@ -2,26 +2,12 @@
 
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createEnquiryPublic } from "@/services/authApi";
-
-interface FormData {
-  companyName: string;
-  contactPersonName: string;
-  email: string;
-  phone: string;
-  preferredDestination: string;
-  travelDate: string;
-  travellersCount: number | undefined;
-  tripDuration: string;
-  budgetRange: number | undefined;
-  businessType: string;
-  message: string;
-}
 
 const schema = yup
   .object({
@@ -47,6 +33,8 @@ const schema = yup
   })
   .required();
 
+type FormData = yup.InferType<typeof schema>;
+
 const ContactForm = () => {
   const {
     register,
@@ -54,7 +42,9 @@ const ContactForm = () => {
     reset,
     formState: { errors, isSubmitting },
     setValue,
-  } = useForm<FormData>({ resolver: yupResolver(schema) });
+  } = useForm<FormData>({
+    resolver: yupResolver(schema) as Resolver<FormData>,
+  });
 
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [startDate, endDate] = dateRange;
