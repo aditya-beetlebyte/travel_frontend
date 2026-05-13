@@ -1,11 +1,10 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import type { DataType } from "@/data/ListingData";
+import type { TravelPackage } from "@/services/packageApi";
 import EnquirySidebar from "./EnquirySidebar";
 
-const TourDetailContent = ({ tour }: { tour: DataType }) => {
+const TourDetailContent = ({ tour }: { tour: TravelPackage }) => {
    const [openDay, setOpenDay] = useState<number>(0);
 
    return (
@@ -32,13 +31,13 @@ const TourDetailContent = ({ tour }: { tour: DataType }) => {
                               <i className="fa-sharp fa-solid fa-angle-right"></i>
                            </li>
                            <li>
-                              <Link href="/tour-grid-1">Tours</Link>
+                              <Link href="/packages">Packages</Link>
                            </li>
                            <li>
                               <i className="fa-sharp fa-solid fa-angle-right"></i>
                            </li>
                            <li>
-                              <span>{tour.title}</span>
+                              <span>{tour.packageName}</span>
                            </li>
                         </ul>
                      </div>
@@ -56,15 +55,15 @@ const TourDetailContent = ({ tour }: { tour: DataType }) => {
                      <div className="tg-tour-about-wrap mr-30">
                         {/* Title */}
                         <h2 className="tg-tour-details-video-title mb-20">
-                           {tour.title}
+                           {tour.packageName}
                         </h2>
 
                         {/* Tour Image */}
                         <div className="tg-tour-details-video-thumb mb-25">
-                           <Image
+                           <img
                               className="w-100"
-                              src={tour.thumb}
-                              alt={tour.title}
+                              src={tour.images?.[0] || "/assets/img/destination/tu/des-1.jpg"}
+                              alt={tour.packageName}
                               style={{ borderRadius: "8px" }}
                            />
                         </div>
@@ -73,21 +72,8 @@ const TourDetailContent = ({ tour }: { tour: DataType }) => {
                         <div className="d-flex flex-wrap align-items-center gap-3 mb-20">
                            <span className="tg-listing-card-duration-map">
                               <i className="fa-regular fa-clock mr-5"></i>
-                              {tour.time}
+                              {tour.duration?.nights ?? 0} Nights / {tour.duration?.days ?? 0} Days
                            </span>
-                           {tour.tourType && (
-                              <span
-                                 style={{
-                                    background: "#560CE31a",
-                                    color: "#560CE3",
-                                    padding: "4px 12px",
-                                    borderRadius: "20px",
-                                    fontSize: "14px",
-                                 }}
-                              >
-                                 {tour.tourType}
-                              </span>
-                           )}
                            <span
                               style={{
                                  background: "#560CE31a",
@@ -97,36 +83,36 @@ const TourDetailContent = ({ tour }: { tour: DataType }) => {
                                  fontSize: "14px",
                               }}
                            >
-                              {tour.location}
+                              {tour.destination}
                            </span>
                         </div>
 
                         {/* Tour Overview */}
-                        {tour.overview && (
+                        {tour.travelAdvisory && (
                            <div className="tg-tour-about-inner mb-25">
                               <h4 className="tg-tour-about-title mb-15">
                                  Tour Overview
                               </h4>
                               <p className="text-capitalize lh-28">
-                                 {tour.overview}
+                                 {tour.travelAdvisory}
                               </p>
                            </div>
                         )}
 
                         {/* Tour Highlights */}
-                        {tour.highlights && tour.highlights.length > 0 && (
+                        {tour.itinerary && tour.itinerary.length > 0 && (
                            <div className="tg-tour-about-inner mb-30">
                               <h4 className="tg-tour-about-title mb-15">
                                  Trip Highlights
                               </h4>
                               <div className="tg-tour-about-list">
                                  <ul>
-                                    {tour.highlights.map((hl, i) => (
+                                    {tour.itinerary.slice(0, 4).map((hl, i) => (
                                        <li key={i}>
                                           <span className="icon mr-10">
                                              <i className="fa-sharp fa-solid fa-check fa-fw"></i>
                                           </span>
-                                          <span className="text">{hl}</span>
+                                          <span className="text">{hl.title}</span>
                                        </li>
                                     ))}
                                  </ul>
@@ -157,7 +143,7 @@ const TourDetailContent = ({ tour }: { tour: DataType }) => {
                                                 onClick={() => setOpenDay(idx)}
                                                 type="button"
                                              >
-                                                <span>{item.day}</span> -{" "}
+                                                <span>Day {item.dayNumber}</span> -{" "}
                                                 {item.title}
                                              </button>
                                           </h2>
@@ -167,7 +153,7 @@ const TourDetailContent = ({ tour }: { tour: DataType }) => {
                                              }`}
                                           >
                                              <div className="accordion-body">
-                                                <p>{item.desc}</p>
+                                                <p>{item.description}</p>
                                              </div>
                                           </div>
                                        </div>
@@ -221,6 +207,24 @@ const TourDetailContent = ({ tour }: { tour: DataType }) => {
                                     </div>
                                  )}
                               </div>
+                           </div>
+                        )}
+
+                        {(tour.paymentTerms || tour.cancellationPolicy) && (
+                           <div className="tg-tour-about-inner mb-40">
+                              <h4 className="tg-tour-about-title mb-20">Policies</h4>
+                              {tour.paymentTerms && (
+                                 <div className="mb-20">
+                                    <h6 className="mb-10">Payment Terms</h6>
+                                    <p className="lh-28">{tour.paymentTerms}</p>
+                                 </div>
+                              )}
+                              {tour.cancellationPolicy && (
+                                 <div>
+                                    <h6 className="mb-10">Cancellation Policy</h6>
+                                    <p className="lh-28">{tour.cancellationPolicy}</p>
+                                 </div>
+                              )}
                            </div>
                         )}
                      </div>

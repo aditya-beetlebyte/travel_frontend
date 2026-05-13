@@ -33,6 +33,7 @@ export default function AdminLayout({
 
   const canBlog = can(permissions, isSuperAdmin, "blogs", "read");
   const canOffers = can(permissions, isSuperAdmin, "offers", "read");
+  const canPackages = can(permissions, isSuperAdmin, "packages", "read");
   const canUsers = can(permissions, isSuperAdmin, "users", "read");
   const canEnquiry = can(permissions, isSuperAdmin, "enquiry", "read");
 
@@ -114,6 +115,21 @@ export default function AdminLayout({
             >
               <NavIcon d="M12 8v13m0-13V6a2 2 0 1 1 2 2h-2zm0 0V5.5A2.5 2.5 0 1 0 9.5 8H12zm-7 4h14M5 12a2 2 0 1 1 0 4h14a2 2 0 1 1 0-4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
               Offers
+            </Link>
+          )}
+          {canPackages && (
+            <Link
+              href="/admin/packages"
+              className={pathname.startsWith("/admin/packages") ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
+              onClick={(e) => {
+                if (pathname.startsWith("/admin/packages")) {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent("admin-refresh-packages"));
+                }
+              }}
+            >
+              <NavIcon d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4 M8 10h8 M8 14h6" />
+              Packages
             </Link>
           )}
           {canUsers && (

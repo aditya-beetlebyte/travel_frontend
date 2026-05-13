@@ -1,15 +1,37 @@
 "use client";
-import listing_data from "@/data/ListingData";
+import { useEffect, useState } from "react";
 import HeaderThree from "@/layouts/headers/HeaderThree";
 import FooterSix from "@/layouts/footers/FooterSix";
 import TourDetailContent from "./TourDetailContent";
 import Link from "next/link";
+import type { TravelPackage } from "@/services/packageApi";
+import { fetchPublicPackageById } from "@/services/packagePublicApi";
 
 const TourDetailById = ({ id }: { id: string }) => {
-   const numId = Number(id);
-   const tour = listing_data.find(
-      (item) => item.id === numId && item.page === "home_1"
-   );
+   const [tour, setTour] = useState<TravelPackage | null>(null);
+   const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+      setLoading(true);
+      fetchPublicPackageById(id)
+         .then((data) => setTour(data))
+         .catch(() => setTour(null))
+         .finally(() => setLoading(false));
+   }, [id]);
+
+   if (loading) {
+      return (
+         <>
+            <HeaderThree />
+            <main>
+               <div className="container pt-120 pb-120 text-center">
+                  <h2>Loading Tour...</h2>
+               </div>
+            </main>
+            <FooterSix />
+         </>
+      );
+   }
 
    if (!tour) {
       return (

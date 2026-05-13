@@ -1,9 +1,11 @@
 "use client"
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import Image from "next/image";
 import Link from "next/link";
-import location_data from '@/data/LocationData';
+import type { TravelPackage } from "@/services/packageApi";
+import { fetchPublicPackages } from "@/services/packagePublicApi";
 
 import location_bg from "@/assets/img/destination/tu/bg.png"
 
@@ -37,6 +39,17 @@ const setting = {
 };
 
 const Location = () => {
+   const [packages, setPackages] = useState<TravelPackage[]>([]);
+
+   useEffect(() => {
+      fetchPublicPackages({ limit: 20 })
+         .then((res) => setPackages(res.data || []))
+         .catch((err) => {
+            console.error("Failed to load packages for slider", err);
+            setPackages([]);
+         });
+   }, []);
+
    return (
       <div className="tg-location-area p-relative z-index-1 pb-65 pt-120">
          <div className="tg-location-su-bg">
@@ -60,18 +73,29 @@ const Location = () => {
             <div className="row">  
                <div className="col-12">
                   <Swiper {...setting} modules={[Autoplay, Navigation]} className="swiper-container tg-location-su-slider">
-                     {location_data.filter((items) => items.page === "home_1").map((item) => (
-                        <SwiperSlide key={item.id} className="swiper-slide">
+                     {packages.map((item) => (
+                        <SwiperSlide key={item._id} className="swiper-slide">
                            <div className="tg-location-3-wrap  tg-location-su-wrap  p-relative mb-30 tg-round-25">
                               <div className="tg-location-thumb tg-round-25">
-                                 <Image className="w-100 tg-round-25" src={item.thumb} alt="location" />
+                                 {item.images?.[0] ? (
+                                    <img
+                                       className="w-100 tg-round-25"
+                                       src={item.images[0]}
+                                       alt={item.packageName}
+                                       style={{ height: 240, objectFit: "cover" }}
+                                    />
+                                 ) : (
+                                    <Image className="w-100 tg-round-25" src={location_bg} alt="location" />
+                                 )}
                               </div>
                               <div className="tg-location-content tg-location-su-content">
                                  <div className="content">
-                                    <h3 className="tg-location-title mb-5"><Link href={`/tour-details/${item.id}`}>{item.title}</Link></h3>
-                                    <span className="tg-location-su-duration">{item.total}</span>
+                                    <h3 className="tg-location-title mb-5"><Link href={`/tour-details/${item._id}`}>{item.packageName}</Link></h3>
+                                    <span className="tg-location-su-duration">
+                                       {(item.duration?.nights ?? 0).toString().padStart(2, "0")}N / {(item.duration?.days ?? 0).toString().padStart(2, "0")}D
+                                    </span>
                                  </div>
-                                 <Link className="icons" href={`/tour-details/${item.id}`}>
+                                 <Link className="icons" href={`/tour-details/${item._id}`}>
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                        <path d="M2 13.0969L13.0969 2M13.0969 2H2M13.0969 2V13.0969" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>

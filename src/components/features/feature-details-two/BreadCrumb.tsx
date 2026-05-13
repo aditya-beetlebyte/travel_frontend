@@ -10,7 +10,7 @@ const BreadCrumb = () => {
                      <ul>
                         <li><Link href="/">Home</Link></li>
                         <li><i className="fa-sharp fa-solid fa-angle-right"></i></li>
-                        <li><Link href="/tour-grid-1">Tour Grid</Link></li>
+                        <li><Link href="/packages">Packages</Link></li>
                         <li><i className="fa-sharp fa-solid fa-angle-right"></i></li>
                         <li><span>Vatican Museums Sistine Chapel Skip the Line</span></li>
                      </ul>
