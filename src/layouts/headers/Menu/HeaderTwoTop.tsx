@@ -1,11 +1,8 @@
-import FacebookIcon from "@/svg/FacebookIcon"
 import InstagramIcon from "@/svg/InstagramIcon"
-import PintarestIcon from "@/svg/PintarestIcon"
-import TwitterIcon from "@/svg/TwitterIcon"
+import { INSTAGRAM_URL } from "@/constants/social"
 import Link from "next/link"
 
-const HeaderTwoTop = () => {
-   return (
+const HeaderTwoTop = () => {   return (
       <div className="tg-header-top tg-header-top-space tg-primary-bg d-none d-lg-block">
          <div className="container-fluid container-1790">
             <div className="row">
@@ -21,23 +18,8 @@ const HeaderTwoTop = () => {
                      <span>Follow us:</span>
                      <ul>
                         <li>
-                           <Link href="#">
-                              <FacebookIcon />
-                           </Link>
-                        </li>
-                        <li>
-                           <Link href="#">
-                              <TwitterIcon />
-                           </Link>
-                        </li>
-                        <li>
-                           <Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54">
+                           <Link href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
                               <InstagramIcon />
-                           </Link>
-                        </li>
-                        <li>
-                           <Link href="#">
-                              <PintarestIcon />
                            </Link>
                         </li>
                      </ul>

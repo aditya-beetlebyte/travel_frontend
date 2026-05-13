@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 
+import { INSTAGRAM_URL } from "@/constants/social"
+
 import img_1 from "@/assets/img/shop/details/dt-large.png"
 import img_2 from "@/assets/img/shop/details/dt-large-2.png"
 import img_3 from "@/assets/img/shop/details/dt-large-3.png"
@@ -148,14 +150,7 @@ const ShopDetailsArea = ({ single_product }: any) => {
                      </div>
                      <div className="tg-product-details-share">
                         <span>Social Share:</span>
-                        <Link href="#"><i className="fa-brands fa-facebook-f"></i></Link>
-                        <Link href="#">
-                           <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M9.33161 6.77486L15.1688 0H13.7856L8.71722 5.8826L4.66907 0H0L6.12155 8.89546L0 16H1.38336L6.73581 9.78785L11.0109 16H15.68L9.33148 6.77486H9.33187H9.33161ZM7.43696 8.97374L6.81669 8.088L1.88171 1.03969H4.00634L7.98902 6.72789L8.60929 7.61362L13.7863 15.0074H11.6616L7.43709 8.974V8.97361L7.43696 8.97374Z" fill="currentColor" />
-                           </svg>
-                        </Link>
-                        <Link href="#"><i className="fa-brands fa-linkedin-in"></i></Link>
-                        <Link href="#"><i className="fa-brands fa-youtube"></i></Link>
+                        <Link href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-instagram"></i></Link>
                      </div>
                   </div>
                </div>

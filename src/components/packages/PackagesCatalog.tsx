@@ -2,16 +2,22 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import HeaderThree from "@/layouts/headers/HeaderThree";
 import FooterSix from "@/layouts/footers/FooterSix";
 import type { TravelPackage } from "@/services/packageApi";
 import { fetchPublicPackages } from "@/services/packagePublicApi";
 
 export default function PackagesCatalog() {
+  const searchParams = useSearchParams();
   const [packages, setPackages] = useState<TravelPackage[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);
   const [selectedNights, setSelectedNights] = useState<number[]>([]);
+
+  useEffect(() => {
+    setSelectedDestinations(searchParams.getAll("destination"));
+  }, [searchParams]);
 
   useEffect(() => {
     setLoading(true);

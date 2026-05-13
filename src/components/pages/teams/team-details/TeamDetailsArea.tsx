@@ -3,6 +3,8 @@ import TeamProgress from "./TeamProgress"
 import TeamContact from "./TeamContact"
 import Link from "next/link"
 
+import { INSTAGRAM_URL } from "@/constants/social"
+
 import team_1 from "@/assets/img/banner/banner-2/shape.png"
 import team_2 from "@/assets/img/team/details.jpg"
 
@@ -23,10 +25,7 @@ const TeamDetailsArea = () => {
                         <h5>Esther Howard</h5>
                         <span>Consulting</span>
                         <div className="tg-team-social">
-                           <Link href="#"><i className="fa-brands fa-facebook-f"></i></Link>
-                           <Link href="#"><i className="fa-brands fa-twitter"></i></Link>
-                           <Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54"><i className="fa-brands fa-instagram"></i></Link>
-                           <Link href="#"><i className="fa-brands fa-pinterest-p"></i></Link>
+                           <Link href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-instagram"></i></Link>
                         </div>
                      </div>
                      <div className="tg-team-details-contant">

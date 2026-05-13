@@ -1,5 +1,6 @@
 import Wrapper from "@/layouts/Wrapper";
 import PackagesCatalog from "@/components/packages/PackagesCatalog";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Packages - Triptrix Voyages",
@@ -8,7 +9,9 @@ export const metadata = {
 export default function PackagesPage() {
   return (
     <Wrapper>
-      <PackagesCatalog />
+      <Suspense fallback={null}>
+        <PackagesCatalog />
+      </Suspense>
     </Wrapper>
   );
 }

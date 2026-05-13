@@ -2,6 +2,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import { INSTAGRAM_URL } from "@/constants/social"
 import logo from "@/assets/img/logo/logo-white.png"
 
 const FooterFour = () => {
@@ -28,11 +29,7 @@ const FooterFour = () => {
                               </form>
                            </div>
                            <div className="tg-footer-social">
-                              <Link href="#"><i className="fa-brands fa-facebook-f"></i></Link>
-                              <Link href="#"><i className="fa-brands fa-twitter"></i></Link>
-                              <Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54"><i className="fa-brands fa-instagram"></i></Link>
-                              <Link href="#"><i className="fa-brands fa-pinterest-p"></i></Link>
-                              <Link href="#"><i className="fa-brands fa-youtube"></i></Link>
+                              <Link href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-instagram"></i></Link>
                            </div>
                         </div>
                      </div>

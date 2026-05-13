@@ -1,7 +1,8 @@
-import logo from "@/assets/img/logo/logo-green.png"
 import Image from "next/image"
 import Link from "next/link"
 
+import { INSTAGRAM_URL } from "@/constants/social"
+import logo from "@/assets/img/logo/logo-green.png"
 interface SidebarProps {
    sidebar: boolean;
    setSidebar: (offCanvas: boolean) => void;
@@ -34,10 +35,9 @@ const Sidebar = ({ sidebar, setSidebar }: SidebarProps) => {
                </div>
             </div>
             <div className="offCanvas__social-icon mt-30">
-               <Link href="/"><i className="fab fa-facebook-f"></i></Link>
-               <Link href="/"><i className="fab fa-twitter"></i></Link>
-               <Link href="/"><i className="fab fa-google-plus-g"></i></Link>
-               <Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54"><i className="fab fa-instagram"></i></Link>
+               <Link href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-instagram"></i>
+               </Link>
             </div>
          </div>
          <div onClick={() => setSidebar(false)} className={`offCanvas__overly ${sidebar ? "active" : ""}`}></div>

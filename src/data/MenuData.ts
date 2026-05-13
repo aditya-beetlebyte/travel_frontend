@@ -1,5 +1,5 @@
 
-interface MenuItem {
+export interface MenuItem {
     id: number;
     title: string;
     link: string;
@@ -28,7 +28,8 @@ const menu_data: MenuItem[] = [
         id: 4,
         title: "Packages",
         link: "/packages",
-        has_dropdown: false,
+        has_dropdown: true,
+        sub_menus: [],
     },
     {
         id: 5,

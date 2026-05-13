@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import { INSTAGRAM_URL } from "@/constants/social"
 import logo from "@/assets/img/logo/logo-green.png"
 import MobileMenu from "./MobileMenu";
 
@@ -34,11 +35,11 @@ const Offcanvas = ({ offCanvas, setOffCanvas }: MobileSidebarProps) => {
                </div>
                <div className="social-links">
                   <ul className="list-wrap">
-                     <li><Link href="#"><i className="fab fa-facebook-f"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-twitter"></i></Link></li>
-                     <li><Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54"><i className="fab fa-instagram"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-linkedin-in"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-youtube"></i></Link></li>
+                     <li>
+                        <Link href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+                           <i className="fab fa-instagram"></i>
+                        </Link>
+                     </li>
                   </ul>
                </div>
             </nav>

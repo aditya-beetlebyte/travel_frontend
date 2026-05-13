@@ -1,5 +1,6 @@
-import Image from "next/image"
 import team_data from "@/data/TeamData"
+import { INSTAGRAM_URL } from "@/constants/social"
+import Image from "next/image"
 import Link from "next/link"
 
 import shape_1 from "@/assets/img/about/details/shape.png"
@@ -26,10 +27,7 @@ const TeamArea = () => {
                            <h5><Link href="/team-details">{item.title}</Link></h5>
                            <span>Consulting</span>
                            <div className="tg-team-social">
-                              <Link href="#"><i className="fa-brands fa-facebook-f"></i></Link>
-                              <Link href="#"><i className="fa-brands fa-twitter"></i></Link>
-                              <Link href="https://www.instagram.com/triptrixvoyages_?igsh=Y3FtOWVqcG5mdG54"><i className="fa-brands fa-instagram"></i></Link>
-                              <Link href="#"><i className="fa-brands fa-pinterest-p"></i></Link>
+                              <Link href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-instagram"></i></Link>
                            </div>
                         </div>
                      </div>
