@@ -48,7 +48,7 @@ const HeaderThree = () => {
                               </span>
                               <div className="tg-header-contact-number d-none d-xl-block">
                                  <span>Call Us:</span>
-                                 <Link href="tel:+123595966">+123 5959 66</Link>
+                                 <Link href="tel:+919310436035">+91 93104 36035</Link>
                               </div>
                            </div>
                            <div className="tg-header-cart p-relative ml-20 pl-20 d-none d-xl-block">

@@ -66,11 +66,11 @@ const FooterThree = () => {
                                     </Link>
                                  </li>
                                  <li>
-                                    <Link className="d-flex" href="tel:+1238889999">
+                                    <Link className="d-flex" href="tel:+919310436035">
                                        <span className="mr-15">
                                           <i className="fa-sharp text-white fa-solid fa-phone"></i>
                                        </span>
-                                       +123 888 9999
+                                       +91 93104 36035
                                     </Link>
                                  </li>
                                  {/* <li className="d-flex">

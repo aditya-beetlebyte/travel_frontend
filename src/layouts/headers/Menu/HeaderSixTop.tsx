@@ -14,7 +14,7 @@ const HeaderSixTop = () => {
                </div>
                <div className="col-lg-6">
                   <div className="tg-header-top-info d-flex align-items-center justify-content-end">
-                     <Link href="tel:+123595966"><i className="fa-sharp fa-regular fa-phone"></i> +123 5959 66</Link>
+                     <Link href="tel:+919310436035"><i className="fa-sharp fa-regular fa-phone"></i> +91 93104 36035</Link>
                   </div>
                </div>
             </div>

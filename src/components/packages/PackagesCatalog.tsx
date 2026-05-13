@@ -12,7 +12,6 @@ export default function PackagesCatalog() {
   const [loading, setLoading] = useState(true);
   const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);
   const [selectedNights, setSelectedNights] = useState<number[]>([]);
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -43,16 +42,9 @@ export default function PackagesCatalog() {
       if (selectedNights.length > 0 && !selectedNights.includes(p.duration?.nights ?? -1)) {
         return false;
       }
-      const packageLanguages = ["English", "Hindi"];
-      if (
-        selectedLanguages.length > 0 &&
-        !selectedLanguages.some((lang) => packageLanguages.includes(lang))
-      ) {
-        return false;
-      }
       return true;
     });
-  }, [packages, selectedDestinations, selectedNights, selectedLanguages]);
+  }, [packages, selectedDestinations, selectedNights]);
 
   const toggleDestination = (value: string) => {
     setSelectedDestinations((prev) =>
@@ -62,12 +54,6 @@ export default function PackagesCatalog() {
 
   const toggleNight = (value: number) => {
     setSelectedNights((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
-  };
-
-  const toggleLanguage = (value: string) => {
-    setSelectedLanguages((prev) =>
       prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
     );
   };
@@ -111,20 +97,6 @@ export default function PackagesCatalog() {
                     </label>
                   ))}
                 </div>
-                <hr style={{ margin: "12px 0", borderColor: "#e5e7eb" }} />
-                <div>
-                  <label style={{ display: "block", marginBottom: 8, fontWeight: 600 }}>Language</label>
-                  {["English", "Hindi"].map((lang) => (
-                    <label key={lang} style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 6 }}>
-                      <input
-                        type="checkbox"
-                        checked={selectedLanguages.includes(lang)}
-                        onChange={() => toggleLanguage(lang)}
-                      />
-                      <span>{lang}</span>
-                    </label>
-                  ))}
-                </div>
               </div>
             </div>
             <div className="col-xl-9 col-lg-8">
@@ -139,20 +111,20 @@ export default function PackagesCatalog() {
                 <div className="row">
                   {filtered.map((item) => (
                     <div key={item._id} className="col-xl-4 col-md-6 mb-25">
-                      <div className="tg-listing-card-item tg-listing-su-card-item">
+                      <Link
+                        href={`/tour-details/${item._id}`}
+                        className="tg-listing-card-item tg-listing-su-card-item d-block text-decoration-none"
+                        style={{ color: "inherit", cursor: "pointer" }}
+                      >
                         <div className="tg-listing-card-thumb fix mb-20 p-relative">
-                          <Link href={`/tour-details/${item._id}`}>
-                            {item.images?.[0] ? (
-                              <img className="tg-card-border w-100" src={item.images[0]} alt={item.packageName} style={{ height: 190, objectFit: "cover" }} />
-                            ) : (
-                              <div className="tg-card-border w-100" style={{ height: 190, background: "#e5e7eb" }} />
-                            )}
-                          </Link>
+                          {item.images?.[0] ? (
+                            <img className="tg-card-border w-100" src={item.images[0]} alt={item.packageName} style={{ height: 190, objectFit: "cover" }} />
+                          ) : (
+                            <div className="tg-card-border w-100" style={{ height: 190, background: "#e5e7eb" }} />
+                          )}
                         </div>
                         <div className="tg-listing-card-content">
-                          <h4 className="tg-listing-card-title mb-10">
-                            <Link href={`/tour-details/${item._id}`}>{item.packageName}</Link>
-                          </h4>
+                          <h4 className="tg-listing-card-title mb-10">{item.packageName}</h4>
                           <div className="tg-listing-card-duration-tour mb-15">
                             <span className="tg-listing-card-duration-map">{item.destination}, India</span>
                           </div>
@@ -160,7 +132,7 @@ export default function PackagesCatalog() {
                             {(item.duration?.nights ?? 0).toString().padStart(2, "0")} Nights / {(item.duration?.days ?? 0).toString().padStart(2, "0")} Days
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   ))}
                 </div>

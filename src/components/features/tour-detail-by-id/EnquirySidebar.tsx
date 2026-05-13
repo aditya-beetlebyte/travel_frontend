@@ -348,7 +348,10 @@ const EnquirySidebar = ({ tour }: { tour: TravelPackage }) => {
                }}
             ></div>
             <p className="mb-5" style={{ fontSize: "14px" }}>
-               Call Us : +91 98320 98320
+               Call Us :{" "}
+               <a href="tel:+919310436035" style={{ color: "inherit" }}>
+                  +91 93104 36035
+               </a>
             </p>
             <p style={{ fontSize: "14px" }}>
                Mail Us : info@vedikdestination.com
