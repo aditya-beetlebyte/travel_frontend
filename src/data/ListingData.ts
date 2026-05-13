@@ -780,4 +780,17 @@ const listing_data: DataType[] = [
    },
 ];
 
-export default listing_data;
+const ALLOWED_LOCATIONS = new Set([
+   "North East, India",
+   "Meghalaya, India",
+   "Bhutan",
+   "Arunachal Pradesh, India",
+   "Arunachal Pradesh & Assam, India",
+   "Meghalaya & Assam, India",
+]);
+
+const filtered_listing_data = listing_data.filter((item) =>
+   ALLOWED_LOCATIONS.has((item.location || "").trim())
+);
+
+export default filtered_listing_data;

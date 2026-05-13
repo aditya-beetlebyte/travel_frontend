@@ -284,6 +284,7 @@ export default function AdminEnquiriesPage() {
                 <th>Contact</th>
                 <th>Email</th>
                 <th>Destination</th>
+                <th>Package</th>
                 <th>Travel dates</th>
                 <th>Travellers</th>
                 <th>Budget</th>
@@ -304,6 +305,7 @@ export default function AdminEnquiriesPage() {
                   <td>{e.contactPersonName}</td>
                   <td>{e.email}</td>
                   <td>{e.preferredDestination || "—"}</td>
+                  <td>{e.packageName || "—"}</td>
                   <td>{e.travelDate || "—"}</td>
                   <td>{e.travellersCount || "—"}</td>
                   <td>{e.budgetRange || "—"}</td>
@@ -355,6 +357,7 @@ export default function AdminEnquiriesPage() {
                   <div>
                     {e.preferredDestination || "—"} · {e.travelDate || "—"}
                   </div>
+                  <div>Package: {e.packageName || "—"}</div>
                   <div>
                     Travellers: {e.travellersCount || "—"} · Budget:{" "}
                     {e.budgetRange || "—"}
@@ -442,6 +445,10 @@ export default function AdminEnquiriesPage() {
               <div className={styles.modalField}>
                 <span className={styles.modalLabel}>Preferred Destination</span>
                 <div className={styles.modalValue}>{selected.preferredDestination || "—"}</div>
+              </div>
+              <div className={styles.modalField}>
+                <span className={styles.modalLabel}>Package</span>
+                <div className={styles.modalValue}>{selected.packageName || "—"}</div>
               </div>
               <div className={styles.modalField}>
                 <span className={styles.modalLabel}>Travel Date / Month</span>

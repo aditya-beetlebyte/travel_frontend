@@ -339,6 +339,7 @@ export default function EnquiriesBoardPage() {
                         </div>
                       </div>
                       <div>{e.preferredDestination || "—"}</div>
+                      <div>Package: {e.packageName || "—"}</div>
                       <div>{e.travelDate || "—"}</div>
                       <div>
                         Travellers: {e.travellersCount || "—"} · Budget:{" "}
@@ -394,6 +395,10 @@ export default function EnquiriesBoardPage() {
               <div className={styles.modalField}>
                 <span className={styles.modalLabel}>Preferred Destination</span>
                 <div className={styles.modalValue}>{selected.preferredDestination || "—"}</div>
+              </div>
+              <div className={styles.modalField}>
+                <span className={styles.modalLabel}>Package</span>
+                <div className={styles.modalValue}>{selected.packageName || "—"}</div>
               </div>
               <div className={styles.modalField}>
                 <span className={styles.modalLabel}>Travel Date / Month</span>

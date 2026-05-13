@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import Image from "next/image"
-import listing_data from "@/data/ListingData"
+import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import Wishlist from "@/svg/home-one/Wishlist"
 import Clock from "@/svg/home-one/Clock"
@@ -9,6 +9,8 @@ import User from "@/svg/home-one/User"
 import Location from "@/svg/home-one/Location"
 import { useDispatch } from "react-redux"
 import { addToWishlist } from "@/redux/features/wishlistSlice"
+import { fetchPublicPackages } from "@/services/packagePublicApi"
+import type { TravelPackage } from "@/services/packageApi"
 
 import shape_1 from "@/assets/img/listing/su/shape-2.png"
 import shape_2 from "@/assets/img/listing/su/shape-1.png"
@@ -16,6 +18,47 @@ import shape_2 from "@/assets/img/listing/su/shape-1.png"
 const Listing = () => {
 
    const dispatch = useDispatch();
+   const [packages, setPackages] = useState<TravelPackage[]>([]);
+
+   useEffect(() => {
+      fetchPublicPackages({ limit: 100 })
+         .then((res) => setPackages(res.data || []))
+         .catch((err) => {
+            console.error("Failed to load featured packages", err);
+            setPackages([]);
+         });
+   }, []);
+
+   const featuredPackages = useMemo(() => {
+      const categoryKey = (p: TravelPackage): "meghalaya" | "bhutan" | "northEast" | null => {
+         const dest = (p.destination || "").toLowerCase();
+         const name = (p.packageName || "").toLowerCase();
+         if (dest.includes("bhutan") || name.includes("bhutan")) return "bhutan";
+         if (dest.includes("meghalaya") || name.includes("meghalaya")) return "meghalaya";
+         if (dest.includes("arunachal") || name.includes("north east") || name.includes("north-east")) return "northEast";
+         return null;
+      };
+
+      const pickTwo = (key: "meghalaya" | "bhutan" | "northEast") => {
+         return packages.filter((p) => categoryKey(p) === key).slice(0, 2);
+      };
+
+      const picked = [
+         ...pickTwo("meghalaya"),
+         ...pickTwo("bhutan"),
+         ...pickTwo("northEast"),
+      ];
+
+      // Ensure unique IDs (avoid duplicates if a package matches multiple categories).
+      const seen = new Set<string>();
+      return picked.filter((p) => {
+         if (!p._id) return false;
+         if (seen.has(p._id)) return false;
+         seen.add(p._id);
+         return true;
+      });
+   }, [packages]);
+
    // add to wishlist
    const handleAddToWishlist = (item: any) => {
       dispatch(addToWishlist(item));
@@ -35,13 +78,25 @@ const Listing = () => {
                </div>
             </div>
             <div className="row">
-               {listing_data.filter((items) => items.page === "home_1").map((item) => (
-                  <div key={item.id} className="col-xl-4 col-lg-4 col-md-6">
+               {featuredPackages.map((item) => (
+                  <div key={item._id} className="col-xl-4 col-lg-4 col-md-6">
                      <div className="tg-listing-card-item tg-listing-su-card-item mb-25">
                         <div className="tg-listing-card-thumb fix mb-25 p-relative">
-                           <Link href={`/tour-details/${item.id}`}>
-                              <Image className="tg-card-border w-100" src={item.thumb} alt="listing" />
-                              {item.tag && <span className="tg-listing-item-price-discount">{item.tag}</span>}
+                           <Link href={`/tour-details/${item._id}`}>
+                              <img
+                                 className="tg-card-border w-100"
+                                 src={item.images?.[0] || shape_1.src}
+                                 alt={item.packageName}
+                                 style={{ height: 210, objectFit: "cover", background: "#e5e7eb" }}
+                                 onError={(e) => {
+                                    const imgEl = e.currentTarget;
+                                    // Prevent endless loop.
+                                    imgEl.onerror = null;
+                                    console.warn("Featured card image failed to load:", item.images?.[0], item._id);
+                                    imgEl.src = shape_1.src;
+                                 }}
+                              />
+                              <span className="tg-listing-item-price-discount">Featured</span>
                            </Link>
                            <div className="tg-listing-item-wishlist">
                               <a onClick={() => handleAddToWishlist(item)} style={{ cursor: "pointer" }}>
@@ -53,29 +108,29 @@ const Listing = () => {
                            <div className="tg-listing-card-duration-tour d-flex align-items-center gap-3">
                               <span className="tg-listing-card-duration-map mb-5">
                                  <Clock />
-                                 {item.time}
+                                 {(item.duration?.nights ?? 0).toString().padStart(2, "0")} Nights / {(item.duration?.days ?? 0).toString().padStart(2, "0")} Days
                               </span>
                               <span className="tg-listing-card-duration-time mb-5">
                                  <User />
-                                 {item.guest}
+                                 02 Adults
                               </span>
                            </div>
-                           <h4 className="tg-listing-card-title mb-10"><Link href={`/tour-details/${item.id}`}>{item.title}</Link></h4>
+                           <h4 className="tg-listing-card-title mb-10"><Link href={`/tour-details/${item._id}`}>{item.packageName}</Link></h4>
                            <div className="tg-listing-card-duration-tour mb-20">
                               <span className="tg-listing-card-duration-map">
                                  <Location />
-                                 {item.location}
+                                 {[item.destination, "India"].filter(Boolean).join(", ")}
                               </span>
                            </div>
                            <div className="tg-listing-card-price d-flex align-items-end justify-content-between">
                               <div>
                                  <span className="tg-listing-card-currency-amount d-flex align-items-center">
-                                    <span className="currency-symbol mr-5">{item.time}</span>
+                                    <span className="currency-symbol mr-5">{(item.duration?.nights ?? 0).toString().padStart(2, "0")}N/{(item.duration?.days ?? 0).toString().padStart(2, "0")}D</span>
                                  </span>
                               </div>
                               <div>
-                                 <span className="tg-listing-rating-icon"><i className="fa-sharp fa-solid fa-star"></i> {item.review}</span>
-                                 <span className="tg-listing-rating-percent">{item.total_review}</span>
+                                 <span className="tg-listing-rating-icon"><i className="fa-sharp fa-solid fa-star"></i> 5.0</span>
+                                 <span className="tg-listing-rating-percent">(50 Reviews)</span>
                               </div>
                            </div>
                         </div>
@@ -84,7 +139,7 @@ const Listing = () => {
                ))}
                <div className="col-12">
                   <div className="text-center mt-15">
-                     <Link href="/tour-grid-1" className="tg-btn tg-btn-transparent tg-btn-su-transparent">See More Tours</Link>
+                     <Link href="/packages" className="tg-btn tg-btn-transparent tg-btn-su-transparent">See More Tours</Link>
                   </div>
                </div>
             </div>

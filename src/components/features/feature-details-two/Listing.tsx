@@ -51,7 +51,7 @@ const Listing = () => {
                </div>
                <div className="col-lg-3">
                   <div className="tg-location-3-btn text-end wow fadeInUp mb-40" data-wow-delay=".6s" data-wow-duration=".9s">
-                     <Link href="/tour-grid-1" className="tg-btn tg-btn-gray tg-btn-switch-animation">
+                     <Link href="/packages" className="tg-btn tg-btn-gray tg-btn-switch-animation">
                         <Button text='See All Deal' />
                      </Link>
                   </div>

@@ -26,12 +26,18 @@ const menu_data: MenuItem[] = [
     },
     {
         id: 4,
+        title: "Packages",
+        link: "/packages",
+        has_dropdown: false,
+    },
+    {
+        id: 5,
         title: "Blogs",
         link: "/blog-grid",
         has_dropdown: false,
     },
     {
-        id: 5,
+        id: 6,
         title: "Contact",
         link: "/contact",
         has_dropdown: false,
