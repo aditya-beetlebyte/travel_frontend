@@ -69,7 +69,9 @@ Set in **Cloud Run → Variables & secrets** (runtime):
 
 The browser calls **`/api/...` on your frontend domain**; Next.js proxies to that backend URL on the server. You do **not** need to rebuild when only this URL changes — save a new revision.
 
-**Container port:** **8080** (Cloud Run default).
+**Container port:** must be **8080** in Cloud Run (matches `ENV PORT=8080` in Dockerfile).
+
+If deploy fails with “failed to start and listen on PORT=8080”, check Cloud Run logs for the revision; ensure the latest Dockerfile with `docker-entrypoint.sh` is deployed.
 
 **Local dev:** same `.env` value; `npm run dev` proxies `/api/*` to the backend automatically.
 
