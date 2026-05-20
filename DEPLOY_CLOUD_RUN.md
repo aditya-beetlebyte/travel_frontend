@@ -82,3 +82,7 @@ Push the tag to Artifact Registry and deploy with `gcloud run deploy --image ...
 ## CORS
 
 Your **backend** must allow the Cloud Run frontend origin (the `https://....run.app` URL) if the browser calls the API directly.
+
+## Troubleshooting
+
+**`npm ci` fails in Docker / Cloud Build** with “package.json and package-lock.json are not in sync”: commit the latest `package-lock.json` from the repo (run `npm install` locally after any `package.json` change, then commit both files). Never edit `package.json` without updating the lockfile.
