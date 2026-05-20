@@ -59,11 +59,17 @@ gcloud run deploy travel-frontend \
 - Set `--min-instances 1` if you want to avoid cold starts (small extra cost).
 - Cloud Run sets `PORT`; the container already listens on `3000`.
 
-## 5. When the API URL changes
+## 5. API URL (`NEXT_PUBLIC_API_URL`)
 
-`NEXT_PUBLIC_*` values are compiled into the bundle at **image build** time.
+Set this in **Cloud Run → Variables & secrets** (runtime). The app reads it on each request and injects it for the browser, so you **do not need to rebuild** when only the API URL changes.
 
-Change `NEXT_PUBLIC_API_URL` → run **step 3** again → **step 4** again (or deploy the new `latest`).
+Use your backend URL **with no trailing slash**, e.g.:
+
+`https://travel-backend-535611153717.europe-west1.run.app`
+
+**Container port:** set **8080** in Cloud Run (or leave default); the image listens on `PORT` from Cloud Run.
+
+After changing env vars, deploy a **new revision** (Save in console or redeploy).
 
 ## Optional: build on your computer
 

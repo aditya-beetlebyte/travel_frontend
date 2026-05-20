@@ -1,8 +1,8 @@
-const AUTH_TOKEN_KEY = "auth_token";
+import { getApiUrl } from "@/lib/apiConfig";
 
-export function getApiUrl(): string {
-  return process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-}
+export { getApiUrl };
+
+const AUTH_TOKEN_KEY = "auth_token";
 
 export function getAuthToken(): string | null {
   if (typeof window === "undefined") return null;
