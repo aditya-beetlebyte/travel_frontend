@@ -80,28 +80,38 @@ const Listing = () => {
             <div className="row">
                {featuredPackages.map((item) => (
                   <div key={item._id} className="col-xl-4 col-lg-4 col-md-6">
-                     <div className="tg-listing-card-item tg-listing-su-card-item mb-25">
+                     <Link
+                        href={`/tour-details/${item._id}`}
+                        className="tg-listing-card-item tg-listing-su-card-item mb-25 d-block text-decoration-none"
+                        style={{ color: "inherit", cursor: "pointer" }}
+                     >
                         <div className="tg-listing-card-thumb fix mb-25 p-relative">
-                           <Link href={`/tour-details/${item._id}`}>
-                              <img
-                                 className="tg-card-border w-100"
-                                 src={item.images?.[0] || shape_1.src}
-                                 alt={item.packageName}
-                                 style={{ height: 210, objectFit: "cover", background: "#e5e7eb" }}
-                                 onError={(e) => {
-                                    const imgEl = e.currentTarget;
-                                    // Prevent endless loop.
-                                    imgEl.onerror = null;
-                                    console.warn("Featured card image failed to load:", item.images?.[0], item._id);
-                                    imgEl.src = shape_1.src;
-                                 }}
-                              />
-                              <span className="tg-listing-item-price-discount">Featured</span>
-                           </Link>
+                           <img
+                              className="tg-card-border w-100"
+                              src={item.images?.[0] || shape_1.src}
+                              alt={item.packageName}
+                              style={{ height: 210, objectFit: "cover", background: "#e5e7eb" }}
+                              onError={(e) => {
+                                 const imgEl = e.currentTarget;
+                                 imgEl.onerror = null;
+                                 console.warn("Featured card image failed to load:", item.images?.[0], item._id);
+                                 imgEl.src = shape_1.src;
+                              }}
+                           />
+                           <span className="tg-listing-item-price-discount">Featured</span>
                            <div className="tg-listing-item-wishlist">
-                              <a onClick={() => handleAddToWishlist(item)} style={{ cursor: "pointer" }}>
+                              <button
+                                 type="button"
+                                 aria-label="Add to wishlist"
+                                 onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleAddToWishlist(item);
+                                 }}
+                                 style={{ cursor: "pointer", border: "none", background: "transparent", padding: 0 }}
+                              >
                                  <Wishlist />
-                              </a>
+                              </button>
                            </div>
                         </div>
                         <div className="tg-listing-card-content">
@@ -115,7 +125,7 @@ const Listing = () => {
                                  02 Adults
                               </span>
                            </div>
-                           <h4 className="tg-listing-card-title mb-10"><Link href={`/tour-details/${item._id}`}>{item.packageName}</Link></h4>
+                           <h4 className="tg-listing-card-title mb-10">{item.packageName}</h4>
                            <div className="tg-listing-card-duration-tour mb-20">
                               <span className="tg-listing-card-duration-map">
                                  <Location />
@@ -134,7 +144,7 @@ const Listing = () => {
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </Link>
                   </div>
                ))}
                <div className="col-12">
