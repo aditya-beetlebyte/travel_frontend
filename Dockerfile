@@ -16,9 +16,13 @@ COPY . .
 ARG NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
+# Placeholder for next build (.env is not copied into the image)
+RUN node scripts/write-runtime-config.mjs --allow-missing
+
 RUN npm run build
-# Bake API URL into public/runtime-config.js at build time (fallback if runtime write fails)
-RUN node scripts/write-runtime-config.mjs
+
+# If Cloud Build passes --build-arg NEXT_PUBLIC_API_URL=..., bake it into the image
+RUN if [ -n "$NEXT_PUBLIC_API_URL" ]; then node scripts/write-runtime-config.mjs; fi
 
 FROM base AS runner
 WORKDIR /app

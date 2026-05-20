@@ -35,12 +35,20 @@ function readFromRuntimeConfigFile(): string | null {
  * Server (SSR/layout): reads NEXT_PUBLIC_API_URL at runtime from process.env
  * or public/runtime-config.js (Cloud Run entrypoint). Not compile-time inlined.
  */
+function isNextProductionBuild(): boolean {
+  return process.env.NEXT_PHASE === "phase-production-build";
+}
+
 export function getServerApiUrl(): string {
   const url = readFromProcessEnv() ?? readFromRuntimeConfigFile();
-  if (!url) {
-    throw new Error(
-      "NEXT_PUBLIC_API_URL is not set. Add it to .env or Cloud Run env, and run scripts/write-runtime-config.mjs."
-    );
+  if (url) return url;
+
+  // Docker build has no .env; real URL is injected when the container starts
+  if (isNextProductionBuild()) {
+    return "http://127.0.0.1:1";
   }
-  return url;
+
+  throw new Error(
+    "NEXT_PUBLIC_API_URL is not set. Add it to .env or Cloud Run env, and run scripts/write-runtime-config.mjs."
+  );
 }

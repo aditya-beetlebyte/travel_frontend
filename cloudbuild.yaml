@@ -1,10 +1,8 @@
-# Build in Google Cloud Build with the correct API URL baked into the client.
-# 1. Create Artifact Registry repo once: gcloud artifacts repositories create travel --repository-format=docker --location=asia-south1
-# 2. From this folder (travel_frontend), run:
-#    gcloud builds submit --config=cloudbuild.yaml \
-#      --substitutions=_NEXT_PUBLIC_API_URL=https://YOUR-BACKEND.run.app
-#
-# Then deploy the image Cloud Build prints, or use the last step if you add it.
+# Build frontend Docker image for Cloud Run.
+# Build succeeds without _NEXT_PUBLIC_API_URL; set NEXT_PUBLIC_API_URL on the Cloud Run service at runtime.
+# Optional: bake URL at build time:
+#   gcloud builds submit --config=cloudbuild.yaml \
+#     --substitutions=_NEXT_PUBLIC_API_URL=https://YOUR-BACKEND.run.app
 
 substitutions:
   _REGION: asia-south1

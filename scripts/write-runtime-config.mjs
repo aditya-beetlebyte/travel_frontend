@@ -1,5 +1,6 @@
 /**
- * Writes public/runtime-config.js from NEXT_PUBLIC_API_URL (npm run dev / Docker start).
+ * Writes public/runtime-config.js from NEXT_PUBLIC_API_URL.
+ * Use --allow-missing during Docker image build when URL is set only at Cloud Run runtime.
  */
 import fs from "fs";
 import path from "path";
@@ -8,6 +9,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(__dirname, "..");
 const outPath = path.join(appRoot, "public", "runtime-config.js");
+const allowMissing = process.argv.includes("--allow-missing");
 
 /** Read NEXT_PUBLIC_API_URL from .env (wins over stale shell env in local dev). */
 function readApiUrlFromDotEnv() {
@@ -32,8 +34,17 @@ function readApiUrlFromDotEnv() {
 }
 
 const raw = (readApiUrlFromDotEnv() ?? process.env.NEXT_PUBLIC_API_URL)?.trim();
+
 if (!raw) {
-  console.error("[runtime-config] NEXT_PUBLIC_API_URL is required in environment or .env");
+  if (allowMissing) {
+    fs.mkdirSync(path.dirname(outPath), { recursive: true });
+    fs.writeFileSync(outPath, 'window.__NEXT_PUBLIC_API_URL__="";\n', "utf8");
+    console.warn(
+      "[runtime-config] NEXT_PUBLIC_API_URL not set at build — placeholder written; entrypoint will set it at container start"
+    );
+    process.exit(0);
+  }
+  console.error("[runtime-config] NEXT_PUBLIC_API_URL is required (env, .env, or Docker --build-arg)");
   process.exit(1);
 }
 

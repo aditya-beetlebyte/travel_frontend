@@ -29,7 +29,7 @@ gcloud artifacts repositories create travel \
   --description="Travel app images"
 ```
 
-## 3. Build the image (bakes `NEXT_PUBLIC_API_URL`)
+## 3. Build the image
 
 From **`travel_frontend`** (this directory):
 
@@ -38,7 +38,9 @@ gcloud builds submit --config=cloudbuild.yaml \
   --substitutions=_NEXT_PUBLIC_API_URL=https://YOUR-BACKEND-URL.run.app
 ```
 
-Use your real backend base URL **with no trailing slash**, if that matches your frontend code.
+Optional: pass `_NEXT_PUBLIC_API_URL` to bake the URL into the image at build time. If you omit it, the build still succeeds; the **Cloud Run service env** (step 5) is required at runtime.
+
+Use your real backend base URL **with no trailing slash**.
 
 The built image is tagged as:
 
@@ -52,12 +54,13 @@ gcloud run deploy travel-frontend \
   --platform managed \
   --region asia-south1 \
   --allow-unauthenticated \
-  --port 3000 \
+  --port 8080 \
+  --set-env-vars NEXT_PUBLIC_API_URL=https://YOUR-BACKEND-URL.run.app \
   --min-instances 0
 ```
 
 - Set `--min-instances 1` if you want to avoid cold starts (small extra cost).
-- Cloud Run sets `PORT`; the container already listens on `3000`.
+- **Container port must be 8080** (see Dockerfile `ENV PORT=8080`).
 
 ## 5. API URL (`NEXT_PUBLIC_API_URL`)
 
@@ -67,13 +70,13 @@ Set in **Cloud Run → Variables & secrets** (runtime):
 
 (no trailing slash)
 
-The browser calls **`/api/...` on your frontend domain**; Next.js proxies to that backend URL on the server. You do **not** need to rebuild when only this URL changes — save a new revision.
+The frontend reads the backend from **`NEXT_PUBLIC_API_URL`** (`public/runtime-config.js` is rewritten when the container starts).
 
-**Container port:** must be **8080** in Cloud Run (matches `ENV PORT=8080` in Dockerfile).
+**Cloud Build trigger (source deploy):** you do not need a build-time URL. You **must** set `NEXT_PUBLIC_API_URL` on the Cloud Run service under **Variables & secrets**, then deploy a new revision.
 
-If deploy fails with “failed to start and listen on PORT=8080”, check Cloud Run logs for the revision; ensure the latest Dockerfile with `docker-entrypoint.sh` is deployed.
+If the container exits immediately, check logs for `[entrypoint] ERROR: set NEXT_PUBLIC_API_URL on the Cloud Run service`.
 
-**Local dev:** same `.env` value; `npm run dev` proxies `/api/*` to the backend automatically.
+**Local dev:** set the same value in `travel_frontend/.env`, then `npm run dev`.
 
 ## Optional: build on your computer
 
@@ -84,7 +87,7 @@ docker build \
   --build-arg NEXT_PUBLIC_API_URL=https://YOUR-BACKEND.run.app \
   -t travel-frontend .
 
-docker run -p 3000:3000 travel-frontend
+docker run -p 8080:8080 -e NEXT_PUBLIC_API_URL=https://YOUR-BACKEND.run.app travel-frontend
 ```
 
 Push the tag to Artifact Registry and deploy with `gcloud run deploy --image ...` as above.
