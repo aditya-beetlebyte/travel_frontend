@@ -26,7 +26,9 @@ const MobileMenuInner = () => {
     try {
       const [pathPart, queryPart] = subMenuLink.split("?");
       if (currentRoute !== pathPart) return false;
-      if (!queryPart) return true;
+      if (!queryPart) {
+        return searchParams.getAll("destination").length === 0;
+      }
       const sub = new URLSearchParams(queryPart);
       const want = sub.getAll("destination").sort().join("\0");
       const have = searchParams.getAll("destination").sort().join("\0");
