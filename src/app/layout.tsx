@@ -1,13 +1,17 @@
 import ClientRoot from "./ClientRoot";
-import { getPublicApiUrlForInjection } from "@/lib/apiConfig";
+import { getServerApiUrl } from "@/lib/apiConfig";
+
+// Read NEXT_PUBLIC_API_URL at request time (Cloud Run runtime env), not only at build time
+export const dynamic = "force-dynamic";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const apiUrl = getPublicApiUrlForInjection();
+  const apiUrl = getServerApiUrl();
   const isDev = process.env.NODE_ENV === "development";
 
   return (
     <html lang="en" suppressHydrationWarning={isDev}>
       <head>
+        <meta name="api-base-url" content={apiUrl} />
         <meta
           name="keywords"
           content="Triptrixvoyages - Tour & Travel Booking React Next js Template"

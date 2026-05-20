@@ -61,15 +61,17 @@ gcloud run deploy travel-frontend \
 
 ## 5. API URL (`NEXT_PUBLIC_API_URL`)
 
-Set this in **Cloud Run → Variables & secrets** (runtime). The app reads it on each request and injects it for the browser, so you **do not need to rebuild** when only the API URL changes.
+Set in **Cloud Run → Variables & secrets** (runtime):
 
-Use your backend URL **with no trailing slash**, e.g.:
+`NEXT_PUBLIC_API_URL=https://travel-backend-535611153717.europe-west1.run.app`
 
-`https://travel-backend-535611153717.europe-west1.run.app`
+(no trailing slash)
 
-**Container port:** set **8080** in Cloud Run (or leave default); the image listens on `PORT` from Cloud Run.
+The browser calls **`/api/...` on your frontend domain**; Next.js proxies to that backend URL on the server. You do **not** need to rebuild when only this URL changes — save a new revision.
 
-After changing env vars, deploy a **new revision** (Save in console or redeploy).
+**Container port:** **8080** (Cloud Run default).
+
+**Local dev:** same `.env` value; `npm run dev` proxies `/api/*` to the backend automatically.
 
 ## Optional: build on your computer
 
