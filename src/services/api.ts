@@ -1,4 +1,4 @@
-import { getApiUrl } from "@/lib/apiConfig";
+import { getApiUrl } from "@/lib/apiConfig.client";
 
 export { getApiUrl };
 

@@ -63,7 +63,7 @@ gcloud run deploy travel-frontend \
 
 Set in **Cloud Run → Variables & secrets** (runtime):
 
-`NEXT_PUBLIC_API_URL=https://travel-backend-535611153717.europe-west1.run.app`
+`NEXT_PUBLIC_API_URL=https://YOUR-BACKEND.run.app`
 
 (no trailing slash)
 

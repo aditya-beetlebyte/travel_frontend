@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# generated from NEXT_PUBLIC_API_URL
+/public/runtime-config.js
+
 # vercel
 .vercel
 

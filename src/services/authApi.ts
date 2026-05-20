@@ -107,7 +107,7 @@ export async function login(
     });
   } catch {
     throw new Error(
-      "Cannot reach server. Make sure the backend is running (e.g. on http://localhost:5000)."
+      `Cannot reach API at ${getApiUrl()}. Check NEXT_PUBLIC_API_URL and that the backend is running.`
     );
   }
   const data = await parseJson<LoginResponse>(res);
@@ -131,7 +131,7 @@ export async function bootstrapFirstAdmin(
     });
   } catch {
     throw new Error(
-      "Cannot reach server. Make sure the backend is running (e.g. on http://localhost:5000)."
+      `Cannot reach API at ${getApiUrl()}. Check NEXT_PUBLIC_API_URL and that the backend is running.`
     );
   }
   const data = await parseJson<LoginResponse>(res);

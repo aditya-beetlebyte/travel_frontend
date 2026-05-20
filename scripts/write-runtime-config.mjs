@@ -1,6 +1,5 @@
 /**
- * Runs at container start (Cloud Run). Writes public/runtime-config.js from
- * NEXT_PUBLIC_API_URL so the browser always gets the live env value.
+ * Writes public/runtime-config.js from NEXT_PUBLIC_API_URL (npm run dev / Docker start).
  */
 import fs from "fs";
 import path from "path";
@@ -10,16 +9,38 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(__dirname, "..");
 const outPath = path.join(appRoot, "public", "runtime-config.js");
 
-const raw =
-  process.env.NEXT_PUBLIC_API_URL ||
-  process.env.API_URL ||
-  process.env.BACKEND_URL ||
-  "";
+/** Read NEXT_PUBLIC_API_URL from .env (wins over stale shell env in local dev). */
+function readApiUrlFromDotEnv() {
+  const envPath = path.join(appRoot, ".env");
+  if (!fs.existsSync(envPath)) return null;
 
-const apiUrl = raw.trim().replace(/\/+$/, "") || "http://localhost:5000";
+  const lines = fs.readFileSync(envPath, "utf8").split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    if (!trimmed.startsWith("NEXT_PUBLIC_API_URL=")) continue;
+    let val = trimmed.slice("NEXT_PUBLIC_API_URL=".length).trim();
+    if (
+      (val.startsWith('"') && val.endsWith('"')) ||
+      (val.startsWith("'") && val.endsWith("'"))
+    ) {
+      val = val.slice(1, -1);
+    }
+    if (val) return val;
+  }
+  return null;
+}
 
+const raw = (readApiUrlFromDotEnv() ?? process.env.NEXT_PUBLIC_API_URL)?.trim();
+if (!raw) {
+  console.error("[runtime-config] NEXT_PUBLIC_API_URL is required in environment or .env");
+  process.exit(1);
+}
+
+const apiUrl = raw.replace(/\/+$/, "");
 const content = `window.__NEXT_PUBLIC_API_URL__=${JSON.stringify(apiUrl)};\n`;
+
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, content, "utf8");
 
-console.log(`[runtime-config] API base URL: ${apiUrl}`);
+console.log(`[runtime-config] wrote ${outPath}`);

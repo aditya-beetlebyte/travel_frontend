@@ -1,5 +1,5 @@
 import ClientRoot from "./ClientRoot";
-import { getServerApiUrl } from "@/lib/apiConfig";
+import { getServerApiUrl } from "@/lib/apiConfig.server";
 
 // Read NEXT_PUBLIC_API_URL at request time (Cloud Run runtime env), not only at build time
 export const dynamic = "force-dynamic";
