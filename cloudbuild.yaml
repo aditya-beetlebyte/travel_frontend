@@ -11,7 +11,7 @@ substitutions:
   _REPO: travel
   _IMAGE: frontend
   # Override on CLI: --substitutions=_NEXT_PUBLIC_API_URL=https://...
-  _NEXT_PUBLIC_API_URL: https://REPLACE-WITH-YOUR-BACKEND.run.app
+  _NEXT_PUBLIC_API_URL: https://travel-backend-535611153717.europe-west1.run.app
 
 steps:
   - name: gcr.io/cloud-builders/docker

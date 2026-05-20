@@ -9,16 +9,22 @@ declare global {
   }
 }
 
-/**
- * Backend base URL from environment (server reads Cloud Run / .env at runtime).
- */
-export function getServerApiUrl(): string {
+const LOCAL_DEV_DEFAULT = "http://localhost:5000";
+
+function readEnvApiUrl(): string | null {
   const fromEnv =
     process.env.NEXT_PUBLIC_API_URL ||
     process.env.API_URL ||
     process.env.BACKEND_URL;
   if (fromEnv?.trim()) return normalizeApiUrl(fromEnv);
-  return "http://localhost:5000";
+  return null;
+}
+
+/**
+ * Server only (SSR, layout). Uses Cloud Run / .env at request time.
+ */
+export function getServerApiUrl(): string {
+  return readEnvApiUrl() ?? LOCAL_DEV_DEFAULT;
 }
 
 function getBrowserApiUrl(): string | null {
@@ -36,14 +42,28 @@ function getBrowserApiUrl(): string | null {
 }
 
 /**
- * All API calls use NEXT_PUBLIC_API_URL (direct to backend, not localhost:3000 proxy).
+ * Base URL for all API fetch() calls.
+ * Browser: runtime-config.js + layout (from NEXT_PUBLIC_API_URL on server).
+ * Never uses localhost:5000 in production unless env is actually missing.
  */
 export function getApiUrl(): string {
-  const fromBrowser = getBrowserApiUrl();
-  if (fromBrowser) return fromBrowser;
+  if (typeof window !== "undefined") {
+    const fromBrowser = getBrowserApiUrl();
+    if (fromBrowser) return fromBrowser;
 
-  const fromEnv = process.env.NEXT_PUBLIC_API_URL;
-  if (fromEnv?.trim()) return normalizeApiUrl(fromEnv);
+    // Inlined at docker build if build-arg was set
+    const builtIn = process.env.NEXT_PUBLIC_API_URL;
+    if (builtIn?.trim()) return normalizeApiUrl(builtIn);
+
+    if (process.env.NODE_ENV === "development") {
+      return LOCAL_DEV_DEFAULT;
+    }
+
+    console.error(
+      "[API] NEXT_PUBLIC_API_URL is missing in the browser. Set it on the FRONTEND Cloud Run service and redeploy."
+    );
+    return LOCAL_DEV_DEFAULT;
+  }
 
   return getServerApiUrl();
 }

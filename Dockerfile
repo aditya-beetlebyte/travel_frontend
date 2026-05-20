@@ -35,8 +35,10 @@ RUN addgroup --system --gid 1001 nodejs \
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder /app/scripts/write-runtime-config.mjs ./scripts/write-runtime-config.mjs
 
 USER nextjs
 EXPOSE 8080
 
-CMD ["node", "server.js"]
+# Cloud Run NEXT_PUBLIC_API_URL → public/runtime-config.js before server starts
+CMD ["sh", "-c", "node scripts/write-runtime-config.mjs && node server.js"]
