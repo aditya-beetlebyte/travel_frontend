@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+import { CONTACT_EMAIL, CONTACT_EMAIL_MAILTO } from "@/constants/contact"
+
 const TeamContact = () => {
    return (
       <div className="tg-team-details-contact-info">
@@ -19,13 +21,7 @@ const TeamContact = () => {
             <div className="col">
                <div className="tg-team-details-contact">
                   <span>E-mail : </span>
-                  <Link href="mailto:info@gmail.com">info@gmail.com</Link>
-               </div>
-            </div>
-            <div className="col">
-               <div className="tg-team-details-contact">
-                  <span>Address :</span>
-                  <Link href="#"> 1426 California, USA </Link>
+                  <Link href={CONTACT_EMAIL_MAILTO}>{CONTACT_EMAIL}</Link>
                </div>
             </div>
          </div>

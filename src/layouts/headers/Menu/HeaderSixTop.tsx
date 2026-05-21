@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+import { CONTACT_EMAIL, CONTACT_EMAIL_MAILTO } from "@/constants/contact"
+
 const HeaderSixTop = () => {
    return (
       <div className="tg-header-top tg-header-top-space tg-primary-bg d-none d-lg-block">
@@ -9,7 +11,7 @@ const HeaderSixTop = () => {
                   <div className="tg-header-top-info d-flex align-items-center">
                      <Link href="https://www.google.com/maps/@41.6758525,-86.2531698,18.17z"><i className="mr-5 fa-regular fa-location-dot"></i> 178 makr street, 8007 Australia</Link>
                      <span className="tg-header-dvdr mr-10 ml-10"></span>
-                     <Link href="mailto:info@Triptrixvoyages.com"><i className="mr-5 fa-regular fa-envelope"></i> info@Triptrixvoyages.com</Link>
+                     <Link href={CONTACT_EMAIL_MAILTO}><i className="mr-5 fa-regular fa-envelope"></i> {CONTACT_EMAIL}</Link>
                   </div>
                </div>
                <div className="col-lg-6">

@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import { CONTACT_EMAIL, CONTACT_EMAIL_MAILTO } from "@/constants/contact"
 import { INSTAGRAM_URL } from "@/constants/social"
 import logo from "@/assets/img/logo/logo-green.png"
 interface SidebarProps {
@@ -20,18 +21,16 @@ const Sidebar = ({ sidebar, setSidebar }: SidebarProps) => {
             </div>
             <div className="offCanvas__side-info mb-30">
                <div className="contact-list mb-30">
-                  <h4>Office Address</h4>
-                  <p>123/A, Miranda City Likaoli <br /> Prikano, Dope</p>
-               </div>
-               <div className="contact-list mb-30">
                   <h4>Phone Number</h4>
-                  <p>+0989 7876 9865 9</p>
-                  <p>+(090) 8765 86543 85</p>
+                  <p>
+                     <Link href="tel:+919310436035">+91 93104 36035</Link>
+                  </p>
                </div>
                <div className="contact-list mb-30">
                   <h4>Email Address</h4>
-                  <p>info@example.com</p>
-                  <p>example.mail@hum.com</p>
+                  <p>
+                     <Link href={CONTACT_EMAIL_MAILTO}>{CONTACT_EMAIL}</Link>
+                  </p>
                </div>
             </div>
             <div className="offCanvas__social-icon mt-30">

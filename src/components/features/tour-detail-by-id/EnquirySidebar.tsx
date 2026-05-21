@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { CONTACT_EMAIL, CONTACT_EMAIL_MAILTO } from "@/constants/contact";
 import { createEnquiryPublic } from "@/services/authApi";
 import type { TravelPackage } from "@/services/packageApi";
 
@@ -354,7 +355,10 @@ const EnquirySidebar = ({ tour }: { tour: TravelPackage }) => {
                </a>
             </p>
             <p style={{ fontSize: "14px" }}>
-               Mail Us : info@vedikdestination.com
+               Mail Us :{" "}
+               <a href={CONTACT_EMAIL_MAILTO} style={{ color: "inherit" }}>
+                  {CONTACT_EMAIL}
+               </a>
             </p>
          </div>
       </div>

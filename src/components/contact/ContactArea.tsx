@@ -2,6 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import ContactForm from "../forms/ContactForm"
 
+import { CONTACT_EMAIL, CONTACT_EMAIL_MAILTO } from "@/constants/contact"
+
 import shape_1 from "@/assets/img/banner/banner-2/shape.png"
 
 const ContactArea = () => {
@@ -26,11 +28,7 @@ const ContactArea = () => {
                            </div>
                            <div className="item">
                               <span>E-mail : </span>
-                              <Link href="mailto:info@gmail.com">info@gmail.com</Link>
-                           </div>
-                           <div className="item">
-                              <span>Address :</span>
-                              <Link href="#"> 1426 California, USA </Link>
+                              <Link href={CONTACT_EMAIL_MAILTO}>{CONTACT_EMAIL}</Link>
                            </div>
                         </div>
                      </div>
